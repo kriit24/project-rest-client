@@ -1,9 +1,9 @@
-# PROJECT MONGO CLIENT
+# PROJECT DB REST API CLIENT
 
 ## Installation
 
 ```
-npm i project-mongo-db
+npm i project-rest-client
 ```
 
 ## Usage details view at docs/
@@ -12,7 +12,7 @@ npm i project-mongo-db
 create configuration file config.js
 
 ```
-import Project from 'project-mongo-db';
+import Project from 'project-rest-client';
 
 
 let Wso = new Project.WS.connect({
@@ -42,7 +42,7 @@ export default Wso;
 create model file app/models/address.js
 
 ```
-import Project from 'project-mongo-db';
+import Project from 'project-rest-client';
 import Wso from "../config";
 
 class Model extends Project.WS.model{
