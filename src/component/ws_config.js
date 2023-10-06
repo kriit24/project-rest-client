@@ -12,6 +12,7 @@ class WS_config{
         uuid: undefined,
         token: undefined,
         cache_length: 1000,
+        hash_key: null,
     };
     static host = undefined;
     static ws = undefined;

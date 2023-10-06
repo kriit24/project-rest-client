@@ -1,5 +1,6 @@
 import WS_config from "./ws_config";
 import * as FileSystem from "expo-file-system";
+import Ws_crypto from "./ws_crypto";
 import canJSON from "project-can-json";
 
 class WS_stmt {
@@ -17,6 +18,7 @@ class WS_stmt {
     setConf(conf) {
 
         WS_config.conf = conf;
+        Ws_crypto.mac_hash = conf.hash_key;
         return this;
     }
 

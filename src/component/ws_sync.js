@@ -180,7 +180,7 @@ class sync extends WS_stmt {
         this.ws
             //.offline()
             .setData(row)
-            .sendJson(row.event, row.model, row.data)
+            .SEND(row.event, row.model, row.data)
             //if everything is ok then do nothing
             .then((response) => {
 
@@ -263,7 +263,7 @@ class sync extends WS_stmt {
             this.ws
                 //.offline()
                 .setData(row)
-                .sendJson(row.event, row.model, row.data)
+                .SEND(row.event, row.model, row.data)
                 //if everything is ok
                 .then(async (response) => {
 

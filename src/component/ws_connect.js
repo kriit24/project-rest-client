@@ -3,6 +3,7 @@ import NetInfo from "@react-native-community/netinfo";
 import WS_stmt from "./ws_stmt";
 import WS_config from "./ws_config";
 import canJSON from 'project-can-json';
+import Ws_crypto from "./ws_crypto";
 
 class WS_connect extends WS_stmt {
 
@@ -186,6 +187,17 @@ class WS_connect extends WS_stmt {
                             console.log('');
                         }
 
+                        let body = {
+                            'join': join.length ? join : null,
+                            'where': where.length ? where : null,
+                            'order': order.length ? order : null,
+                            'limit': limit.length && limit[0] !== undefined ? limit[0] : null,
+                            'offset': limit.length && limit[1] !== undefined ? limit[1] : null,
+                        };
+
+                        let mac = null;
+                        if (WS_config.conf.hash_key)
+                            mac = Ws_crypto.sign(body);
 
                         fetch(url + '/' + this.conf.channel + '/' + table, {
                             method: 'POST',
@@ -194,14 +206,9 @@ class WS_connect extends WS_stmt {
                                 'Content-Type': 'application/json',
                                 'uuid': this.conf.uuid,
                                 'token': this.conf.token,
+                                'mac': mac !== null ? mac.mac : null,
                             },
-                            body: JSON.stringify({
-                                'join': join.length ? join : null,
-                                'where': where.length ? where : null,
-                                'order': order.length ? order : null,
-                                'limit': limit.length && limit[0] !== undefined ? limit[0] : null,
-                                'offset': limit.length && limit[1] !== undefined ? limit[1] : null,
-                            }),
+                            body: JSON.stringify(body),
                         })
                             .then((response) => response.text())
                             .then((response) => {
@@ -227,7 +234,7 @@ class WS_connect extends WS_stmt {
         });
     }
 
-    send(event, table, message) {
+    send(event, table, json) {
 
         return new Promise((resolve, reject) => {
 
@@ -250,7 +257,7 @@ class WS_connect extends WS_stmt {
                     console.log('');
                     console.log('----------WS-SEND----------', event);
                     console.log(url + '/' + this.conf.channel + '/' + table);
-                    console.log(message);
+                    console.log(json);
                     console.log('');
                 }
 
@@ -259,6 +266,12 @@ class WS_connect extends WS_stmt {
                     let isConnected = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
                     if (isConnected) {
 
+                        let body = json;
+
+                        let mac = null;
+                        if (WS_config.conf.hash_key)
+                            mac = Ws_crypto.sign(body);
+
                         fetch(url + '/' + this.conf.channel + '/' + table, {
                             method: 'POST',
                             headers: {
@@ -266,8 +279,9 @@ class WS_connect extends WS_stmt {
                                 'Content-Type': 'application/json',
                                 'uuid': this.conf.uuid,
                                 'token': this.conf.token,
+                                'mac': mac !== null ? mac.mac : null,
                             },
-                            body: message
+                            body: JSON.stringify(body)
                         })
                             .then((response) => response.text())
                             .then((response) => {
@@ -303,11 +317,6 @@ class WS_connect extends WS_stmt {
                 reject({'status': 'error', 'message': 'url is missing'});
             }
         });
-    }
-
-    sendJson(event, table, json) {
-
-        return this.send(event, table, JSON.stringify(json));
     }
 
     sendWssMessage(message) {

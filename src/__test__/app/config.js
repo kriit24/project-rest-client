@@ -16,6 +16,8 @@ let Wso = new Project.WS.connect({
     uuid: 'seeonlihtsaltkatsepikkusega30sona',
     //REST API auth token
     token: 'da01411f889747bfffaf503540c1b8daef8fd4d84c49aa94e0c96270a4d00a3da23de7488aa804248adb19b223b9f4209541f1c257b7502f4083c57f44253e47',
+    //set data encryption hash key - AES-128-CBC
+    hash_key: null,
     //offline post (insert/update) request cached data length
     cache_length: 1000,
 });
