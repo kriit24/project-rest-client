@@ -20,6 +20,8 @@ let Wso = new Project.WS.connect({
     hash_key: null,
     //offline post (insert/update) request cached data length
     cache_length: 1000,
+
+    debug: false
 });
 
 export default Wso;

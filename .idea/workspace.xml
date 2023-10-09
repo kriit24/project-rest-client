@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="AES-128-CBC data transfer added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/app/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/app/model/address.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/model/address.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/app/model/object.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/model/object.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sync.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +65,7 @@
       <workItem from="1696476458493" duration="1461000" />
       <workItem from="1696505201250" duration="17000" />
       <workItem from="1696588530596" duration="1350000" />
-      <workItem from="1696848149227" duration="575000" />
+      <workItem from="1696848149227" duration="3420000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -86,7 +91,13 @@
       <option name="presentableId" value="LOCAL−00004" />
       <updated>1696590210859</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL−00005" summary="AES-128-CBC data transfer added">
+      <created>1696848846300</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1696848846300</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

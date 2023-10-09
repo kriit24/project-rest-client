@@ -10,20 +10,21 @@ class sync extends WS_stmt {
 
     cacheFile = null;
 
-    constructor(table, primaryKey) {
+    constructor(table, primaryKey, updatedAt) {
 
         super();
 
         this.setTable(table);
         this.setPrimaryKey(primaryKey);
+        this.setUpdatedAt(updatedAt);
         this.cacheFile = WS_config.STORAGE_DIR + '/' + this.ws.channel + '/ws_cache.json';
-        WS_config.sync[table] = {table: table, primaryKey: primaryKey};
+        WS_config.sync[table] = {table: table, primaryKey: primaryKey, updatedAt: updatedAt};
 
         let reSync = () => {
 
             Object.values(WS_config.sync).forEach((sync_table) => {
 
-                new sync(sync_table.table, sync_table.primaryKey)
+                new sync(sync_table.table, sync_table.primaryKey, sync_table.updatedAt)
                     .sync();
             });
             this.cacheSend();
@@ -84,11 +85,14 @@ class sync extends WS_stmt {
 
         //console.log('---SYNC---', this.ws.channel + '@' + this.table);
 
+        if (this.updatedAt === undefined)
+            return this;
+
         this
             .fileGetContent(this.ws.channel, this.table)
             .then((modelData) => {
 
-                let updated_at = this.ws.getUpdatedAt(modelData, 'ASC');
+                let updated_at = this.ws.getUpdatedAt(modelData, this.updatedAt, 'ASC');
                 let {join, where} = this.getStmt();
                 this.resetStmt();
 
@@ -96,8 +100,8 @@ class sync extends WS_stmt {
 
                     this.ws
                         .setStmt(join, where)
-                        .where('updated_at', '>', updated_at)
-                        .order("updated_at", "desc")
+                        .where(this.updatedAt, '>', updated_at)
+                        .order(this.updatedAt, "desc")
                         //.debug()
                         .fetch(this.table)
                         .then((data) => {
@@ -111,7 +115,7 @@ class sync extends WS_stmt {
 
                     this.ws
                         .setStmt(join, where)
-                        .order("updated_at", "desc")
+                        .order(this.updatedAt, "desc")
                         //.debug()
                         .fetch(this.table)
                         .then((data) => {
@@ -177,7 +181,7 @@ class sync extends WS_stmt {
         this.ws
             //.offline()
             .setData(row)
-            .SEND(row.event, row.model, row.data)
+            .send(row.event, row.model, row.data)
             //if everything is ok then do nothing
             .then((response) => {
 
@@ -260,7 +264,7 @@ class sync extends WS_stmt {
             this.ws
                 //.offline()
                 .setData(row)
-                .SEND(row.event, row.model, row.data)
+                .send(row.event, row.model, row.data)
                 //if everything is ok
                 .then(async (response) => {
 

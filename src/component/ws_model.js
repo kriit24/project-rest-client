@@ -11,13 +11,14 @@ class WS_model extends WS_stmt {
     belongsStmt = {};
     promises = [];
 
-    constructor(ws, table, primaryKey) {
+    constructor(ws, table, primaryKey, updatedAt) {
 
         super();
 
         this.setWs(ws);
         this.setTable(table);
         this.setPrimaryKey(primaryKey);
+        this.setUpdatedAt(updatedAt);
 
         if (!this.table) {
 
@@ -52,7 +53,7 @@ class WS_model extends WS_stmt {
                 FileSystem.writeAsStringAsync(this.file(this.ws.channel, this.table), JSON.stringify({}));
             }
 
-            let model_sync = new sync(this.table, primaryKey);
+            let model_sync = new sync(this.table, primaryKey, updatedAt);
             model_sync.listen();
             model_sync.sync();
         })();

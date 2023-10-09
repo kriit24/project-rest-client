@@ -5,7 +5,7 @@ class Model extends Project.WS.model{
 
     constructor(wso) {
 
-        super(wso, 'object', 'object_id');
+        super(wso, 'object', 'object_id', 'object_updated_at');
         this.belongsTo('address', 'object_address_id', 'address_id');
     }
 }

@@ -343,7 +343,7 @@ class WS_connect extends WS_stmt {
         }
     }
 
-    getUpdatedAt(modelData, type) {
+    getUpdatedAt(modelData, updated_at_column, type) {
 
         let updated_at = 0;
         if (Object.keys(modelData).length) {
@@ -351,7 +351,7 @@ class WS_connect extends WS_stmt {
             Object.keys(modelData).map((model_id, k) => {
 
                 let row = modelData[model_id];
-                let d = row['updated_at'] !== undefined ? new Date(row['updated_at']) : new Date('1970-01-01');
+                let d = row[updated_at_column] !== undefined ? new Date(row[updated_at_column]) : new Date('1970-01-01');
                 let date = d.toISOString();
 
                 if (type == 'ASC')

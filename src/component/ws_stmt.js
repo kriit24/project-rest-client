@@ -7,6 +7,7 @@ class WS_stmt {
 
     table = undefined;
     primaryKey = undefined;
+    updatedAt = undefined;
     stmtJoin = [];
     stmtWhere = [];
     stmtLimit = [];
@@ -47,6 +48,12 @@ class WS_stmt {
     setPrimaryKey(primaryKey) {
 
         this.primaryKey = primaryKey;
+        return this;
+    }
+
+    setUpdatedAt(updatedAt){
+
+        this.updatedAt = updatedAt;
         return this;
     }
 
