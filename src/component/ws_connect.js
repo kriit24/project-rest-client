@@ -172,7 +172,7 @@ class WS_connect extends WS_stmt {
                     let isConnected = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
                     if (isConnected) {
 
-                        if (debug) {
+                        if (debug || WS_config.conf.debug) {
 
                             console.log('');
                             console.log('----------WS-FETCH----------');
@@ -213,6 +213,14 @@ class WS_connect extends WS_stmt {
                             .then((response) => response.text())
                             .then((response) => {
 
+                                if (debug || WS_config.conf.debug) {
+
+                                    console.log('');
+                                    console.log('----------FETCH RESPONSE------------');
+                                    console.log(response);
+                                    console.log('');
+                                }
+
                                 canJSON(response, (json) => {
 
                                     resolve(json);
@@ -252,7 +260,7 @@ class WS_connect extends WS_stmt {
                     reject({'status': 'error', 'message': 'debug offline'});
                 }
 
-                if (debug) {
+                if (debug || WS_config.conf.debug) {
 
                     console.log('');
                     console.log('----------WS-SEND----------', event);
@@ -285,6 +293,14 @@ class WS_connect extends WS_stmt {
                         })
                             .then((response) => response.text())
                             .then((response) => {
+
+                                if (debug || WS_config.conf.debug) {
+
+                                    console.log('');
+                                    console.log('----------SEND RESPONSE------------');
+                                    console.log(response);
+                                    console.log('');
+                                }
 
                                 canJSON(response, (json) => {
 

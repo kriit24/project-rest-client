@@ -64,12 +64,9 @@ class sync extends WS_stmt {
                 WS_config.appStateStat_2 = nextAppState;
             });
 
-            console.log('netinfo');
             //sync when netstate changed
             if (WS_config.netinfoStateSubscription_2 !== undefined) WS_config.netinfoStateSubscription_2();
             WS_config.netinfoStateSubscription_2 = NetInfo.addEventListener(state => {
-
-                console.log(state);
 
                 let isConnected = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
                 if (isConnected === true && WS_config.netinfoState_2 === false) {

@@ -13,6 +13,7 @@ class WS_config{
         token: undefined,
         cache_length: 1000,
         hash_key: null,
+        debug: false,
     };
     static host = undefined;
     static ws = undefined;
