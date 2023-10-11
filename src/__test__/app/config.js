@@ -1,7 +1,7 @@
-import Project from '../../index';
+import Project_WS from '../../index';
 
 
-let Wso = new Project.WS.connect({
+let Wso = new Project_WS.connect({
     //WSS host for LIVE watch, if not added then live watch not possible
     //wss_host: 'ws://80.235.7.34:6001',
     //fetch from REST API
