@@ -85,30 +85,20 @@ class WS_model extends WS_stmt {
 
         this.addPromise((resolve, reject) => {
 
-            this
-                .fileGetContent(this.ws.channel, this.table)
-                .then(async (modelData) => {
+            let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
+            let primaryKey = this.primaryKey;
 
-                    let primaryKey = this.primaryKey;
-                    let saveData = {};
+            //insert
+            if (data[primaryKey] === undefined) {
 
-                    //insert
-                    if (data[primaryKey] === undefined) {
+                model_sync
+                    .setCallback((response) => {
 
-                        /*
-                        let b = Object.keys(modelData).length ? Object.keys(modelData).sort(function (a, b) {
-                            return a - b
-                        }) : [1];
-                        let bk = b[b.length - 1] + 1;
-                        data[primaryKey] = bk;
-                        */
-                        //modelData[data[primaryKey]] = data;
-
-                        //await FileSystem.writeAsStringAsync(this.file(this.ws.channel, this.table), JSON.stringify(modelData));
-                        //model_sync.send({'event': 'post', 'model': this.table, 'data': saveData});
-                    }
-                    resolve(true);
-                });
+                        model_sync.sync();
+                    })
+                    .send({'event': 'post', 'model': this.table, 'data': data});
+            }
+            resolve(true);
         }, {});
         this.runPromises();
     }
@@ -117,27 +107,20 @@ class WS_model extends WS_stmt {
 
         this.addPromise((resolve, reject) => {
 
-            this
-                .fileGetContent(this.ws.channel, this.table)
-                .then(async (modelData) => {
+            let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
+            let primaryKey = this.primaryKey;
 
-                    let model_sync = new sync(this.table);
-                    let primaryKey = this.primaryKey;
+            if (data[primaryKey] !== undefined) {
 
-                    if (data[primaryKey] !== undefined) {
+                model_sync
+                    .setCallback((response) => {
 
-                        let saveData = modelData[data[primaryKey]] !== undefined ? modelData[data[primaryKey]] : {};
-                        saveData = {...saveData, ...data};
-                        modelData[data[primaryKey]] = saveData;
+                        model_sync.sync();
+                    })
+                    .send({'event': 'post', 'model': this.table, 'data': data});
+            }
 
-                        //console.log('SAVE', saveData);
-
-                        model_sync.send({'event': 'post', 'model': this.table, 'data': saveData});
-                        await FileSystem.writeAsStringAsync(this.file(this.ws.channel, this.table), JSON.stringify(modelData));
-                    }
-
-                    resolve(true);
-                });
+            resolve(true);
         }, {});
         this.runPromises();
     }
@@ -150,7 +133,7 @@ class WS_model extends WS_stmt {
                 .fileGetContent(this.ws.channel, this.table)
                 .then(async (modelData) => {
 
-                    let model_sync = new sync(this.table);
+                    let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
 
                     if (modelData[primary_id] !== undefined) {
 
@@ -161,7 +144,12 @@ class WS_model extends WS_stmt {
 
                         //console.log('DELETE', deleteData);
 
-                        model_sync.send({'event': 'delete', 'model': this.table, 'data': deleteData});
+                        model_sync
+                            .setCallback((response) => {
+
+                                model_sync.sync();
+                            })
+                            .send({'event': 'delete', 'model': this.table, 'data': deleteData});
                         await FileSystem.writeAsStringAsync(this.file(this.ws.channel, this.table), JSON.stringify(modelData));
                     }
                     resolve(true);

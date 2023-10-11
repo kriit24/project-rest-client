@@ -217,7 +217,15 @@ class WS_connect extends WS_stmt {
 
                                     console.log('');
                                     console.log('----------FETCH RESPONSE------------');
-                                    console.log(response);
+                                    console.log({
+                                        'Accept': 'application/json',
+                                        'Content-Type': 'application/json',
+                                        'uuid': this.conf.uuid,
+                                        'token': this.conf.token,
+                                        'mac': mac !== null ? mac.mac : null,
+                                    });
+                                    if (response.length < 500)
+                                        console.log(response);
                                     console.log('');
                                 }
 
@@ -226,11 +234,55 @@ class WS_connect extends WS_stmt {
                                     resolve(json);
                                 }, () => {
 
+                                    if (WS_config.conf.debug) {
+
+                                        console.error(response);
+                                    }
+                                    if (WS_config.conf.error !== undefined) {
+
+                                        fetch(WS_config.conf.error, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Accept': 'application/json',
+                                                'Content-Type': 'application/json',
+                                                'uuid': this.conf.uuid,
+                                                'token': this.conf.token,
+                                            },
+                                            body: JSON.stringify({
+                                                'message': 'FETCH ERROR - RESPONSE IS NOT JSON',
+                                                'url': url + '/' + this.conf.channel + '/' + table,
+                                                'response': response
+                                            })
+                                        });
+                                    }
+
                                     reject({});
                                 });
                             })
                             .catch((error) => {
 
+                                if (WS_config.conf.debug) {
+
+                                    console.error(error);
+                                }
+
+                                if (WS_config.conf.error !== undefined) {
+
+                                    fetch(WS_config.conf.error, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Accept': 'application/json',
+                                            'Content-Type': 'application/json',
+                                            'uuid': this.conf.uuid,
+                                            'token': this.conf.token,
+                                        },
+                                        body: JSON.stringify({
+                                            'message': 'FETCH ERROR - SERVER REQUEST FAILED',
+                                            'url': url + '/' + this.conf.channel + '/' + table,
+                                            'response': error
+                                        })
+                                    });
+                                }
                                 reject({});
                             });
                     } else {
@@ -242,12 +294,11 @@ class WS_connect extends WS_stmt {
         });
     }
 
-    send(event, table, json) {
+    send(event, table, body) {
 
         return new Promise((resolve, reject) => {
 
             let url = this.conf[event];
-            //message = JSON.stringify(mess);
             if (url !== undefined) {
 
                 let offline = this.stmtOffline;
@@ -265,7 +316,7 @@ class WS_connect extends WS_stmt {
                     console.log('');
                     console.log('----------WS-SEND----------', event);
                     console.log(url + '/' + this.conf.channel + '/' + table);
-                    console.log(json);
+                    console.log(body);
                     console.log('');
                 }
 
@@ -273,8 +324,6 @@ class WS_connect extends WS_stmt {
 
                     let isConnected = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
                     if (isConnected) {
-
-                        let body = json;
 
                         let mac = null;
                         if (WS_config.conf.hash_key)
@@ -289,7 +338,7 @@ class WS_connect extends WS_stmt {
                                 'token': this.conf.token,
                                 'mac': mac !== null ? mac.mac : null,
                             },
-                            body: JSON.stringify(body)
+                            body: JSON.stringify(body),
                         })
                             .then((response) => response.text())
                             .then((response) => {
@@ -298,6 +347,13 @@ class WS_connect extends WS_stmt {
 
                                     console.log('');
                                     console.log('----------SEND RESPONSE------------');
+                                    console.log({
+                                        'Accept': 'application/json',
+                                        'Content-Type': 'application/json',
+                                        'uuid': this.conf.uuid,
+                                        'token': this.conf.token,
+                                        'mac': mac !== null ? mac.mac : null,
+                                    });
                                     console.log(response);
                                     console.log('');
                                 }
@@ -316,10 +372,54 @@ class WS_connect extends WS_stmt {
                                     }
                                 }, () => {
 
+                                    if (WS_config.conf.debug) {
+
+                                        console.error(response);
+                                    }
+                                    if (WS_config.conf.error !== undefined) {
+
+                                        fetch(WS_config.conf.error, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Accept': 'application/json',
+                                                'Content-Type': 'application/json',
+                                                'uuid': this.conf.uuid,
+                                                'token': this.conf.token,
+                                            },
+                                            body: JSON.stringify({
+                                                'message': 'SEND ERROR - RESPONSE IS NOT JSON',
+                                                'url': url + '/' + this.conf.channel + '/' + table,
+                                                'response': response
+                                            })
+                                        });
+                                    }
+
                                     reject({'status': 'error', 'response': response});
                                 });
                             })
                             .catch((error) => {
+
+                                if (WS_config.conf.debug) {
+
+                                    console.error(response);
+                                }
+                                if (WS_config.conf.error !== undefined) {
+
+                                    fetch(WS_config.conf.error, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Accept': 'application/json',
+                                            'Content-Type': 'application/json',
+                                            'uuid': this.conf.uuid,
+                                            'token': this.conf.token,
+                                        },
+                                        body: JSON.stringify({
+                                            'message': 'SEND ERROR - SERVER REQUEST FAILED',
+                                            'url': url + '/' + this.conf.channel + '/' + table,
+                                            'response': error
+                                        })
+                                    });
+                                }
 
                                 reject({'status': 'error', 'response': error});
                             });

@@ -52,7 +52,7 @@ export default class Ws_crypto {
         let iv = encHex.parse(iv_string);
         try {
 
-            data = JSON.parse(data);
+            //data = JSON.parse(data);
         } catch (error) {
 
         }

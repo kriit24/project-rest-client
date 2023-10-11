@@ -15,6 +15,7 @@ class WS_stmt {
     stmtDebug = false;
     stmtOffline = false;
     stmtData = null;
+    stmtCallback = null;
 
     setConf(conf) {
 
@@ -55,6 +56,17 @@ class WS_stmt {
 
         this.updatedAt = updatedAt;
         return this;
+    }
+
+    setCallback(callback){
+
+        this.stmtCallback = callback;
+        return this;
+    }
+
+    getCallback(){
+
+        return this.stmtCallback !== undefined ? this.stmtCallback : () => {};
     }
 
     debug() {

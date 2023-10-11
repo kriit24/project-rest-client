@@ -8,6 +8,7 @@ class WS_config{
         fetch: undefined,
         post: undefined,
         delete: undefined,
+        error: undefined,
         channel: undefined,
         uuid: undefined,
         token: undefined,

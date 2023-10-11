@@ -27,7 +27,6 @@ class sync extends WS_stmt {
                 new sync(sync_table.table, sync_table.primaryKey, sync_table.updatedAt)
                     .sync();
             });
-            this.cacheSend();
         };
 
         (async () => {
@@ -60,7 +59,10 @@ class sync extends WS_stmt {
 
                     WS_config.appStateStat_2 = nextAppState;
                     reSync();
-                    this.cacheSend();
+                    if (WS_config.cacheData[this.cacheFile] === undefined || !Object.values(WS_config.cacheData[this.cacheFile]).length) {
+
+                        this.cacheSend();
+                    }
                 }
                 WS_config.appStateStat_2 = nextAppState;
             });
@@ -74,7 +76,10 @@ class sync extends WS_stmt {
 
                     WS_config.netinfoState_2 = isConnected;
                     reSync();
-                    this.cacheSend();
+                    if (WS_config.cacheData[this.cacheFile] === undefined || !Object.values(WS_config.cacheData[this.cacheFile]).length) {
+
+                        this.cacheSend();
+                    }
                 }
                 WS_config.netinfoState_2 = isConnected;
             });
@@ -181,30 +186,19 @@ class sync extends WS_stmt {
         this.ws
             //.offline()
             .setData(row)
+            .setCallback(this.getCallback())
             .send(row.event, row.model, row.data)
             //if everything is ok then do nothing
             .then((response) => {
 
-                if (this.stmtDebug) {
-
-                    console.log('');
-                    console.log('RESPONSE "' + response.status + '"', response);
-                    console.log('');
-                }
+                let callback = this.ws.getCallback();
+                callback(response);
             })
             //if something is wrong then store data
             .catch(async (error) => {
 
+                let callback = this.ws.getCallback();
                 let tmp = this.ws.getData();
-
-                if (this.stmtDebug) {
-
-                    console.log('');
-                    console.log('RESPONSE "ERROR"', error);
-                    console.log(tmp);
-                    console.log('');
-                }
-
                 let date = new Date();
 
                 let cacheData = canJSON(await FileSystem.readAsStringAsync(this.cacheFile));
@@ -223,6 +217,7 @@ class sync extends WS_stmt {
                         await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify(cacheData));
                     }
                 }
+                callback(error);
             });
     }
 
@@ -262,7 +257,6 @@ class sync extends WS_stmt {
             */
 
             this.ws
-                //.offline()
                 .setData(row)
                 .send(row.event, row.model, row.data)
                 //if everything is ok

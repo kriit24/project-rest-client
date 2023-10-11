@@ -10,6 +10,8 @@ let Wso = new Project.WS.connect({
     post: 'https://haldus.projectpartner.ee/wss.php/post_server',
     //delete to REST API
     delete: 'https://haldus.projectpartner.ee/wss.php/delete_server',
+    //error to REST API
+    error: 'https://haldus.projectpartner.ee/wss.php/error',
     //database schema
     channel: 'haldus_projectpartner_ee',
     //REST API auth user
