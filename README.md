@@ -66,6 +66,7 @@ GET request
 
 ```
 object
+.select()//this resets all previous objects
 .with('address')//join
 .limit(2)
 .fetchAll(async (rows) => {
@@ -79,6 +80,7 @@ object
 
 
 object
+.select()//this resets all previous objects
 .where('object_id', 5000)
 .fetch((row) => {
 

@@ -187,6 +187,12 @@ class WS_stmt {
         return this;
     }
 
+    select(){
+
+        this.resetStmt();
+        return this;
+    }
+
     join(method) {
 
         this.stmtJoin.push(method);
