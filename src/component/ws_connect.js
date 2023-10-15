@@ -172,21 +172,6 @@ class WS_connect extends WS_stmt {
                     let isConnected = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
                     if (isConnected) {
 
-                        if (debug || WS_config.conf.debug) {
-
-                            console.log('');
-                            console.log('----------WS-FETCH----------');
-                            console.log(this.conf.fetch + '/' + this.conf.channel + '/' + table);
-                            console.log(JSON.stringify({
-                                'join': join.length ? join : null,
-                                'where': where.length ? where : null,
-                                'order': order.length ? order : null,
-                                'limit': limit.length && limit[0] !== undefined ? limit[0] : null,
-                                'offset': limit.length && limit[1] !== undefined ? limit[1] : null,
-                            }));
-                            console.log('');
-                        }
-
                         let body = {
                             'join': join.length ? join : null,
                             'where': where.length ? where : null,
@@ -198,6 +183,26 @@ class WS_connect extends WS_stmt {
                         let mac = null;
                         if (WS_config.conf.hash_key)
                             mac = Ws_crypto.sign(body);
+
+                        if (debug || WS_config.conf.debug) {
+
+                            console.log('');
+                            console.log('----------WS-FETCH----------');
+                            console.log(this.conf.fetch + '/' + this.conf.channel + '/' + table);
+                            console.log('                 ---HEADER---');
+                            console.log(
+                                {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                    'uuid': this.conf.uuid,
+                                    'token': this.conf.token,
+                                    'mac': mac !== null ? mac.mac : null,
+                                }
+                            );
+                            console.log('                 ---BODY---');
+                            console.log(JSON.stringify(body));
+                            console.log('');
+                        }
 
                         fetch(url + '/' + this.conf.channel + '/' + table, {
                             method: 'POST',

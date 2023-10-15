@@ -219,6 +219,12 @@ class WS_stmt {
         return this;
     }
 
+    whereRaw(column) {
+
+        this.stmtWhere.push([column, "raw", null]);
+        return this;
+    }
+
     whereFilter(haystack, where) {
 
         return Object.values(haystack).filter((row) => {

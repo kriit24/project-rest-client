@@ -28,6 +28,7 @@ export default class MainApp extends React.Component {
         object.delete(5000);
 
         object
+            .select()
             .where('object_id', 5000)
             .fetch((row) => {
 
@@ -37,6 +38,7 @@ export default class MainApp extends React.Component {
 
 
         address
+            .select()
             .where('address_id', 71)
             .fetch((row) => {
 
@@ -48,6 +50,7 @@ export default class MainApp extends React.Component {
         */
 
         object
+            .select()
             .with('address')
             .limit(2)
             .fetchAll(async (rows) => {
