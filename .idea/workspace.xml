@@ -7,9 +7,7 @@
     <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="whereRaw added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/index.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/index.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +64,8 @@
       <workItem from="1697076387682" duration="598000" />
       <workItem from="1697099010237" duration="108000" />
       <workItem from="1697099138395" duration="63000" />
-      <workItem from="1697345718671" duration="974000" />
+      <workItem from="1697345718671" duration="999000" />
+      <workItem from="1697428715868" duration="66000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -122,7 +121,13 @@
       <option name="presentableId" value="LOCAL−00009" />
       <updated>1697099114481</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL−00010" summary="whereRaw added">
+      <created>1697346725403</created>
+      <option name="number" value="LOCAL−00010" />
+      <option name="presentableId" value="LOCAL−00010" />
+      <updated>1697346725403</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

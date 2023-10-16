@@ -215,33 +215,44 @@ class WS_connect extends WS_stmt {
                             },
                             body: JSON.stringify(body),
                         })
-                            .then((response) => response.text())
+                            .then(async (response) => {
+
+                                let headers = response.headers;
+                                headers.url = response.url;
+                                headers.status = response.status;
+                                headers.statusText = response.statusText;
+                                return {headers: headers, text: await response.text()};
+                            })
                             .then((response) => {
 
+                                let repsonse_text = response.text;
                                 if (debug || WS_config.conf.debug) {
 
                                     console.log('');
                                     console.log('----------FETCH RESPONSE------------');
-                                    console.log({
-                                        'Accept': 'application/json',
-                                        'Content-Type': 'application/json',
-                                        'uuid': this.conf.uuid,
-                                        'token': this.conf.token,
-                                        'mac': mac !== null ? mac.mac : null,
-                                    });
-                                    if (response.length < 500)
-                                        console.log(response);
+                                    if( response.headers.status !== 200 ){
+
+                                        console.error('FETCH ERROR');
+                                    }
+                                    console.log(response.headers);
+                                    if (repsonse_text.length < 500)
+                                        console.log(repsonse_text);
                                     console.log('');
                                 }
 
-                                canJSON(response, (json) => {
+                                if( response.headers.status !== 200 ){
+
+                                    reject({});
+                                }
+
+                                canJSON(repsonse_text, (json) => {
 
                                     resolve(json);
                                 }, () => {
 
                                     if (WS_config.conf.debug) {
 
-                                        console.error(response);
+                                        console.error(repsonse_text);
                                     }
                                     if (WS_config.conf.error !== undefined) {
 
@@ -256,7 +267,7 @@ class WS_connect extends WS_stmt {
                                             body: JSON.stringify({
                                                 'message': 'FETCH ERROR - RESPONSE IS NOT JSON',
                                                 'url': url + '/' + this.conf.channel + '/' + table,
-                                                'response': response
+                                                'response': repsonse_text
                                             })
                                         });
                                     }
@@ -345,13 +356,26 @@ class WS_connect extends WS_stmt {
                             },
                             body: JSON.stringify(body),
                         })
-                            .then((response) => response.text())
+                            .then(async (response) => {
+
+                                let headers = response.headers;
+                                headers.url = response.url;
+                                headers.status = response.status;
+                                headers.statusText = response.statusText;
+                                return {headers: headers, text: await response.text()};
+                            })
                             .then((response) => {
+
+                                let repsonse_text = response.text;
 
                                 if (debug || WS_config.conf.debug) {
 
                                     console.log('');
                                     console.log('----------SEND RESPONSE------------');
+                                    if( response.headers.status !== 200 ){
+
+                                        console.error('SEND ERROR');
+                                    }
                                     console.log({
                                         'Accept': 'application/json',
                                         'Content-Type': 'application/json',
@@ -359,11 +383,16 @@ class WS_connect extends WS_stmt {
                                         'token': this.conf.token,
                                         'mac': mac !== null ? mac.mac : null,
                                     });
-                                    console.log(response);
+                                    console.log(repsonse_text);
                                     console.log('');
                                 }
 
-                                canJSON(response, (json) => {
+                                if( response.headers.status !== 200 ){
+
+                                    reject({});
+                                }
+
+                                canJSON(repsonse_text, (json) => {
 
                                     if (json.status === undefined) {
 
@@ -379,7 +408,7 @@ class WS_connect extends WS_stmt {
 
                                     if (WS_config.conf.debug) {
 
-                                        console.error(response);
+                                        console.error(repsonse_text);
                                     }
                                     if (WS_config.conf.error !== undefined) {
 
@@ -394,19 +423,19 @@ class WS_connect extends WS_stmt {
                                             body: JSON.stringify({
                                                 'message': 'SEND ERROR - RESPONSE IS NOT JSON',
                                                 'url': url + '/' + this.conf.channel + '/' + table,
-                                                'response': response
+                                                'response': repsonse_text
                                             })
                                         });
                                     }
 
-                                    reject({'status': 'error', 'response': response});
+                                    reject({'status': 'error', 'response': repsonse_text});
                                 });
                             })
                             .catch((error) => {
 
                                 if (WS_config.conf.debug) {
 
-                                    console.error(response);
+                                    console.error(repsonse_text);
                                 }
                                 if (WS_config.conf.error !== undefined) {
 
