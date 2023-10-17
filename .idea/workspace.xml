@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="use statement added">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="debug format updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +67,8 @@
       <workItem from="1697345718671" duration="999000" />
       <workItem from="1697428715868" duration="168000" />
       <workItem from="1697515120664" duration="988000" />
-      <workItem from="1697516684413" duration="2089000" />
+      <workItem from="1697516684413" duration="2718000" />
+      <workItem from="1697524826256" duration="259000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -160,7 +160,13 @@
       <option name="presentableId" value="LOCAL−00015" />
       <updated>1697518004577</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL−00016" summary="use statement added fix">
+      <created>1697518855920</created>
+      <option name="number" value="LOCAL−00016" />
+      <option name="presentableId" value="LOCAL−00016" />
+      <updated>1697518855920</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +184,8 @@
     <MESSAGE value="added fetch error console warn when request status is not 200 and debug mode is on" />
     <MESSAGE value="send and fetch console log update" />
     <MESSAGE value="use statement added" />
-    <option name="LAST_COMMIT_MESSAGE" value="use statement added" />
+    <MESSAGE value="use statement added fix" />
+    <MESSAGE value="debug format updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug format updated" />
   </component>
 </project>
