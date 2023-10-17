@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="whereRaw added">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="added fetch error console warn when request status is not 200 and debug mode is on">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
@@ -65,7 +65,8 @@
       <workItem from="1697099010237" duration="108000" />
       <workItem from="1697099138395" duration="63000" />
       <workItem from="1697345718671" duration="999000" />
-      <workItem from="1697428715868" duration="66000" />
+      <workItem from="1697428715868" duration="168000" />
+      <workItem from="1697515120664" duration="307000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -127,7 +128,13 @@
       <option name="presentableId" value="LOCAL−00010" />
       <updated>1697346725403</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL−00011" summary="added fetch error console warn when request status is not 200 and debug mode is on">
+      <created>1697428861319</created>
+      <option name="number" value="LOCAL−00011" />
+      <option name="presentableId" value="LOCAL−00011" />
+      <updated>1697428861319</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +149,7 @@
     <MESSAGE value="Project.WS changed to Project_WS" />
     <MESSAGE value=".select() added - this resets all previous objects" />
     <MESSAGE value="whereRaw added" />
-    <option name="LAST_COMMIT_MESSAGE" value="whereRaw added" />
+    <MESSAGE value="added fetch error console warn when request status is not 200 and debug mode is on" />
+    <option name="LAST_COMMIT_MESSAGE" value="added fetch error console warn when request status is not 200 and debug mode is on" />
   </component>
 </project>

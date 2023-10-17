@@ -330,9 +330,20 @@ class WS_connect extends WS_stmt {
                 if (debug || WS_config.conf.debug) {
 
                     console.log('');
-                    console.log('----------WS-SEND----------', event);
-                    console.log(url + '/' + this.conf.channel + '/' + table);
-                    console.log(body);
+                    console.log('----------WS-SEND----------');
+                    console.log(this.conf.fetch + '/' + this.conf.channel + '/' + table);
+                    console.log('                 ---HEADER---');
+                    console.log(
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'uuid': this.conf.uuid,
+                            'token': this.conf.token,
+                            'mac': mac !== null ? mac.mac : null,
+                        }
+                    );
+                    console.log('                 ---BODY---');
+                    console.log(JSON.stringify(body));
                     console.log('');
                 }
 
@@ -376,13 +387,7 @@ class WS_connect extends WS_stmt {
 
                                         console.error('SEND ERROR');
                                     }
-                                    console.log({
-                                        'Accept': 'application/json',
-                                        'Content-Type': 'application/json',
-                                        'uuid': this.conf.uuid,
-                                        'token': this.conf.token,
-                                        'mac': mac !== null ? mac.mac : null,
-                                    });
+                                    console.log(response.headers);
                                     console.log(repsonse_text);
                                     console.log('');
                                 }
