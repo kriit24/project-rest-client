@@ -132,7 +132,7 @@ class WS_stmt {
         return tmp;
     }
 
-    setStmt(join, where, order, limit) {
+    setStmt(join, use, where, order, limit) {
 
         this.stmtJoin = [];
         this.stmtUse = [];
@@ -143,6 +143,11 @@ class WS_stmt {
         if (join !== undefined && join.length) {
             join.map((value) => {
                 this.join(value)
+            });
+        }
+        if (use !== undefined && use.length) {
+            use.map((value) => {
+                this.use(value)
             });
         }
         if (where !== undefined && where.length) {

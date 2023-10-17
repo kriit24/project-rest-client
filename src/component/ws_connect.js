@@ -243,7 +243,7 @@ class WS_connect extends WS_stmt {
                                     console.log('');
                                 }
 
-                                if (response.headers.status !== 200) {
+                                if( response.headers.status !== 200 ){
 
                                     reject({});
                                 }
@@ -398,7 +398,7 @@ class WS_connect extends WS_stmt {
                                     console.log('');
                                 }
 
-                                if (response.headers.status !== 200) {
+                                if( response.headers.status !== 200 ){
 
                                     reject({});
                                 }
