@@ -40,9 +40,9 @@ class WS_fetchdata extends WS_stmt {
         }
 
         let use_relation = {};
-        if (join.length) {
+        if (use.length) {
 
-            join.forEach((v, k) => {
+            use.forEach((v, k) => {
 
                 if( this.belongsStmt[v] !== undefined ) {
 

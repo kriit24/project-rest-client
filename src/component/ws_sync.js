@@ -104,7 +104,7 @@ class sync extends WS_stmt {
                 if (updated_at) {
 
                     this.ws
-                        .setStmt(join, where)
+                        .setStmt(join, use, where)
                         .where(this.updatedAt, '>', updated_at)
                         .order(this.updatedAt, "desc")
                         //.debug()
@@ -119,7 +119,7 @@ class sync extends WS_stmt {
                 } else {
 
                     this.ws
-                        .setStmt(join, where)
+                        .setStmt(join, use, where)
                         .order(this.updatedAt, "desc")
                         //.debug()
                         .fetch(this.table)

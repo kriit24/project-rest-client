@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="use statement added" />
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="use statement added">
+      <change beforePath="$PROJECT_DIR$/src/component/ws_fetchdata.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_fetchdata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sync.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +66,7 @@
       <workItem from="1697345718671" duration="999000" />
       <workItem from="1697428715868" duration="168000" />
       <workItem from="1697515120664" duration="988000" />
-      <workItem from="1697516684413" duration="580000" />
+      <workItem from="1697516684413" duration="882000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -143,7 +146,13 @@
       <option name="presentableId" value="LOCAL−00013" />
       <updated>1697517182563</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL−00014" summary="use statement added">
+      <created>1697517301999</created>
+      <option name="number" value="LOCAL−00014" />
+      <option name="presentableId" value="LOCAL−00014" />
+      <updated>1697517301999</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
