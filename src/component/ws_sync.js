@@ -98,7 +98,7 @@ class sync extends WS_stmt {
             .then((modelData) => {
 
                 let updated_at = this.ws.getUpdatedAt(modelData, this.updatedAt, 'ASC');
-                let {join, where} = this.getStmt();
+                let {join, use, where} = this.getStmt();
                 this.resetStmt();
 
                 if (updated_at) {

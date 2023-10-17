@@ -24,7 +24,7 @@ class WS_fetchdata extends WS_stmt {
 
     fetch(callback) {
 
-        let {join, where, order, limit} = this.getStmt();
+        let {join, use, where, order, limit} = this.getStmt();
         this.resetStmt();
 
         let join_relation = {};
@@ -39,10 +39,22 @@ class WS_fetchdata extends WS_stmt {
             });
         }
 
+        let use_relation = {};
+        if (join.length) {
+
+            join.forEach((v, k) => {
+
+                if( this.belongsStmt[v] !== undefined ) {
+
+                    use_relation[v] = this.belongsStmt[v];
+                }
+            });
+        }
+
         this.ws
             //.debug()
             //.offline()
-            .setStmt(Object.keys(join_relation), where, order, limit)
+            .setStmt(Object.keys(join_relation), Object.keys(use_relation), where, order, limit)
             .fetch(this.table)
             .then((e) => {
 

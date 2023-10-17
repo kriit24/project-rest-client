@@ -160,7 +160,7 @@ class WS_model extends WS_stmt {
 
     fetchAll(callback) {
 
-        let {join, where, order, limit} = this.getStmt();
+        let {join, use, where, order, limit} = this.getStmt();
         this.resetStmt();
 
         this.addPromise((resolve, reject) => {
@@ -169,20 +169,20 @@ class WS_model extends WS_stmt {
             //this.resetStmt();
 
             new WS_fetchdata(this.table, this.primaryKey)
-                .setStmt(join, where, order, limit)
+                .setStmt(join, use, where, order, limit)
                 .setBelongsStmt(this.belongsStmt)
                 .fetch((rows) => {
 
                     callback(rows.length ? rows : []);
                     resolve(true);
                 });
-        }, {join: join, where: where, limit: limit, order: order});
+        }, {join: join, use: use, where: where, limit: limit, order: order});
         this.runPromises();
     }
 
     fetch(callback) {
 
-        let {join, where, order, limit} = this.getStmt();
+        let {join, use, where, order, limit} = this.getStmt();
         this.resetStmt();
 
         this.addPromise((resolve, reject) => {
@@ -191,14 +191,14 @@ class WS_model extends WS_stmt {
             //this.resetStmt();
 
             new WS_fetchdata(this.table, this.primaryKey)
-                .setStmt(join, where, order, limit)
+                .setStmt(join, use, where, order, limit)
                 .setBelongsStmt(this.belongsStmt)
                 .fetch((rows) => {
 
                     callback(rows.length ? rows[0] : {});
                     resolve(true);
                 });
-        }, {join: join, where: where, limit: limit, order: order});
+        }, {join: join, use: use, where: where, limit: limit, order: order});
         this.runPromises();
     }
 
@@ -209,8 +209,8 @@ class WS_model extends WS_stmt {
 
                 if (Object.keys(args).length) {
 
-                    let {join, where, order, limit} = args;
-                    this.setStmt(join, where, order, limit);
+                    let {join, use, where, order, limit} = args;
+                    this.setStmt(join, use, where, order, limit);
                 }
 
                 return new Promise((resolve, reject) => {

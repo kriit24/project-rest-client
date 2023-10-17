@@ -174,6 +174,7 @@ class WS_connect extends WS_stmt {
 
                         let body = {
                             'join': join.length ? join : null,
+                            'use': use.length ? use : null,
                             'where': where.length ? where : null,
                             'order': order.length ? order : null,
                             'limit': limit.length && limit[0] !== undefined ? limit[0] : null,
@@ -230,17 +231,19 @@ class WS_connect extends WS_stmt {
 
                                     console.log('');
                                     console.log('----------FETCH RESPONSE------------');
-                                    if( response.headers.status !== 200 ){
+                                    if (response.headers.status !== 200) {
 
                                         console.error('FETCH ERROR');
                                     }
                                     console.log(response.headers);
-                                    if (repsonse_text.length < 500)
+                                    if (response.headers.status !== 200) {
+
                                         console.log(repsonse_text);
+                                    }
                                     console.log('');
                                 }
 
-                                if( response.headers.status !== 200 ){
+                                if (response.headers.status !== 200) {
 
                                     reject({});
                                 }
@@ -383,16 +386,19 @@ class WS_connect extends WS_stmt {
 
                                     console.log('');
                                     console.log('----------SEND RESPONSE------------');
-                                    if( response.headers.status !== 200 ){
+                                    if (response.headers.status !== 200) {
 
                                         console.error('SEND ERROR');
                                     }
                                     console.log(response.headers);
-                                    console.log(repsonse_text);
+                                    if (response.headers.status !== 200) {
+
+                                        console.log(repsonse_text);
+                                    }
                                     console.log('');
                                 }
 
-                                if( response.headers.status !== 200 ){
+                                if (response.headers.status !== 200) {
 
                                     reject({});
                                 }

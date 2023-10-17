@@ -9,6 +9,7 @@ class WS_stmt {
     primaryKey = undefined;
     updatedAt = undefined;
     stmtJoin = [];
+    stmtUse = [];
     stmtWhere = [];
     stmtLimit = [];
     stmtOrder = [];
@@ -134,6 +135,7 @@ class WS_stmt {
     setStmt(join, where, order, limit) {
 
         this.stmtJoin = [];
+        this.stmtUse = [];
         this.stmtWhere = [];
         this.stmtOrder = [];
         this.stmtLimit = [];
@@ -165,6 +167,7 @@ class WS_stmt {
 
         return {
             'join': this.stmtJoin,
+            'use': this.stmtUse,
             'where': this.stmtWhere,
             'limit': this.stmtLimit,
             'order': this.stmtOrder,
@@ -174,6 +177,7 @@ class WS_stmt {
     resetStmt() {
 
         this.stmtJoin = [];
+        this.stmtUse = [];
         this.stmtWhere = [];
         this.stmtLimit = [];
         this.stmtOrder = [];
@@ -196,6 +200,12 @@ class WS_stmt {
     join(method) {
 
         this.stmtJoin.push(method);
+        return this;
+    }
+
+    use(method) {
+
+        this.stmtUse.push(method);
         return this;
     }
 
