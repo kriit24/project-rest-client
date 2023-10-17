@@ -156,7 +156,7 @@ class WS_connect extends WS_stmt {
 
             if (url !== undefined) {
 
-                let {join, where, limit, order} = this.getStmt();
+                let {join, use, where, limit, order} = this.getStmt();
                 let offline = this.stmtOffline;
                 let debug = this.stmtDebug;
 
