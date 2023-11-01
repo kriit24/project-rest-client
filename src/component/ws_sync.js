@@ -98,13 +98,13 @@ class sync extends WS_stmt {
             .then((modelData) => {
 
                 let updated_at = this.ws.getUpdatedAt(modelData, this.updatedAt, 'ASC');
-                let {join, use, where} = this.getStmt();
+                let {column, join, use, where} = this.getStmt();
                 this.resetStmt();
 
                 if (updated_at) {
 
                     this.ws
-                        .setStmt(join, use, where)
+                        .setStmt(column, join, use, where)
                         .where(this.updatedAt, '>', updated_at)
                         .order(this.updatedAt, "desc")
                         //.debug()
@@ -119,7 +119,7 @@ class sync extends WS_stmt {
                 } else {
 
                     this.ws
-                        .setStmt(join, use, where)
+                        .setStmt(column, join, use, where)
                         .order(this.updatedAt, "desc")
                         //.debug()
                         .fetch(this.table)

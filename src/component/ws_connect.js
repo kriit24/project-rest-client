@@ -156,7 +156,7 @@ class WS_connect extends WS_stmt {
 
             if (url !== undefined) {
 
-                let {join, use, where, limit, order} = this.getStmt();
+                let {column, join, use, where, limit, order} = this.getStmt();
                 let offline = this.stmtOffline;
                 let debug = this.stmtDebug;
 
@@ -173,6 +173,7 @@ class WS_connect extends WS_stmt {
                     if (isConnected) {
 
                         let body = {
+                            'column': column.length ? column : null,
                             'join': join.length ? join : null,
                             'use': use.length ? use : null,
                             'where': where.length ? where : null,

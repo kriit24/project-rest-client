@@ -8,6 +8,7 @@ class WS_stmt {
     table = undefined;
     primaryKey = undefined;
     updatedAt = undefined;
+    stmtColumn = [];
     stmtJoin = [];
     stmtUse = [];
     stmtWhere = [];
@@ -53,21 +54,22 @@ class WS_stmt {
         return this;
     }
 
-    setUpdatedAt(updatedAt){
+    setUpdatedAt(updatedAt) {
 
         this.updatedAt = updatedAt;
         return this;
     }
 
-    setCallback(callback){
+    setCallback(callback) {
 
         this.stmtCallback = callback;
         return this;
     }
 
-    getCallback(){
+    getCallback() {
 
-        return this.stmtCallback !== undefined ? this.stmtCallback : () => {};
+        return this.stmtCallback !== undefined ? this.stmtCallback : () => {
+        };
     }
 
     debug() {
@@ -132,14 +134,20 @@ class WS_stmt {
         return tmp;
     }
 
-    setStmt(join, use, where, order, limit) {
+    setStmt(column, join, use, where, order, limit) {
 
+        this.stmtColumn = [];
         this.stmtJoin = [];
         this.stmtUse = [];
         this.stmtWhere = [];
         this.stmtOrder = [];
         this.stmtLimit = [];
 
+        if (column !== undefined && column.length) {
+            column.map((value) => {
+                this.column(value)
+            });
+        }
         if (join !== undefined && join.length) {
             join.map((value) => {
                 this.join(value)
@@ -171,6 +179,7 @@ class WS_stmt {
     getStmt() {
 
         return {
+            'column': this.stmtColumn,
             'join': this.stmtJoin,
             'use': this.stmtUse,
             'where': this.stmtWhere,
@@ -181,6 +190,7 @@ class WS_stmt {
 
     resetStmt() {
 
+        this.stmtColumn = [];
         this.stmtJoin = [];
         this.stmtUse = [];
         this.stmtWhere = [];
@@ -196,9 +206,17 @@ class WS_stmt {
         return this;
     }
 
-    select(){
+    select(column) {
 
         this.resetStmt();
+        if (column !== undefined)
+            this.stmtColumn = column.isArray ? column : column.replace(/ /gi, '').split(',');
+        return this;
+    }
+
+    column(column) {
+
+        this.stmtColumn.push(column);
         return this;
     }
 
