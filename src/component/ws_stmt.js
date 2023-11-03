@@ -206,6 +206,12 @@ class WS_stmt {
         return this;
     }
 
+    setUseCallbackStmt(stmtUseCallback) {
+
+        this.stmtUseCallback = stmtUseCallback;
+        return this;
+    }
+
     select(column) {
 
         this.resetStmt();
@@ -229,6 +235,13 @@ class WS_stmt {
     use(method) {
 
         this.stmtUse.push(method);
+        if( this.stmtUseCallback === undefined )
+            this.stmtUseCallback = {};
+
+        if (typeof this[method] === "function") {
+
+            this.stmtUseCallback[method] = this[method];
+        }
         return this;
     }
 

@@ -22,17 +22,36 @@ class WS_fetchdata extends WS_stmt {
         return modelData;
     }
 
+    fetchColumns(column, data) {
+
+        if (column.length && data.length) {
+
+            let c = data.length;
+            for (let i = 0; i < c; i++) {
+
+                let row = data[i];
+                let filteredArray = {};
+                column.forEach((k) => {
+
+                    filteredArray[k] = row[k];
+                });
+            }
+        }
+        return data;
+    }
+
     fetch(callback) {
 
         let {column, join, use, where, order, limit} = this.getStmt();
         this.resetStmt();
 
         let join_relation = {};
+        let stmtUseCallback = this.stmtUseCallback;
         if (join.length) {
 
             join.forEach((v, k) => {
 
-                if( this.belongsStmt[v] !== undefined ) {
+                if (this.belongsStmt[v] !== undefined) {
 
                     join_relation[v] = this.belongsStmt[v];
                 }
@@ -44,7 +63,7 @@ class WS_fetchdata extends WS_stmt {
 
             use.forEach((v, k) => {
 
-                if( this.belongsStmt[v] !== undefined ) {
+                if (this.belongsStmt[v] !== undefined) {
 
                     use_relation[v] = this.belongsStmt[v];
                 }
@@ -56,6 +75,7 @@ class WS_fetchdata extends WS_stmt {
             //.offline()
             .setStmt(column, Object.keys(join_relation), Object.keys(use_relation), where, order, limit)
             .fetch(this.table)
+            //fetch success
             .then((e) => {
 
                 let rows = e.data !== undefined ? e.data : {};
@@ -63,11 +83,33 @@ class WS_fetchdata extends WS_stmt {
                 //console.log('---FETCH-DATA---' + this.table, rows.length);
                 callback(rows.length ? rows : {});
             })
+            //fetch error
             .catch(() => {
 
                 this
                     .fileGetContent(this.ws.channel, this.table)
-                    .then((modelData) => {
+                    .then(async (modelData) => {
+
+                        if (Object.keys(use_relation).length) {
+
+                            let c = Object.keys(use_relation).length;
+
+                            for (let i = 0; i < c; i++) {
+
+                                let use_k = Object.keys(use_relation)[i];
+                                if (stmtUseCallback[use_k] !== undefined) {
+
+                                    let call = stmtUseCallback[use_k](modelData);
+                                    if (call instanceof Promise) {
+
+                                        modelData = await call;
+                                    } else {
+
+                                        console.error('project-rest-client ERROR: use callback must return new Promise');
+                                    }
+                                }
+                            }
+                        }
 
                         let ret = this.limitData(this.whereFilter(modelData, where), limit[0], limit[1]);
 
@@ -92,12 +134,12 @@ class WS_fetchdata extends WS_stmt {
                                             let foreignData = this.whereFilter(modelData_2, [[relationPrimary, '=', row_2[foreign]]]);
                                             ret[key_2][relation] = foreignData.length ? foreignData[0] : {};
                                         });
-                                        callback(ret.length ? ret : {});
+                                        callback(ret.length ? this.fetchColumns(column, ret) : {});
                                     });
                             });
                         } else {
 
-                            callback(ret.length ? ret : {});
+                            callback(ret.length ? this.fetchColumns(column, ret) : {});
                         }
                     });
             });

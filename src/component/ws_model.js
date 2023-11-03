@@ -15,6 +15,12 @@ class WS_model extends WS_stmt {
 
         super();
 
+        if( ws === undefined ){
+
+            console.error('project-rest-client ERROR: WS is undefined, this is caused by setting the configuration later then callid the model');
+            return this;
+        }
+
         this.setWs(ws);
         this.setTable(table);
         this.setPrimaryKey(primaryKey);
@@ -172,6 +178,7 @@ class WS_model extends WS_stmt {
             new WS_fetchdata(this.table, this.primaryKey)
                 .setStmt(column, join, use, where, order, limit)
                 .setBelongsStmt(this.belongsStmt)
+                .setUseCallbackStmt(this.stmtUseCallback)
                 .fetch((rows) => {
 
                     callback(rows.length ? rows : []);
@@ -194,6 +201,7 @@ class WS_model extends WS_stmt {
             new WS_fetchdata(this.table, this.primaryKey)
                 .setStmt(column, join, use, where, order, limit)
                 .setBelongsStmt(this.belongsStmt)
+                .setUseCallbackStmt(this.stmtUseCallback)
                 .fetch((rows) => {
 
                     callback(rows.length ? rows[0] : {});
