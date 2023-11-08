@@ -216,7 +216,7 @@ class WS_stmt {
 
         this.resetStmt();
         if (column !== undefined)
-            this.stmtColumn = column.isArray ? column : column.replace(/ /gi, '').split(',');
+            this.stmtColumn = Array.isArray(column) ? column : column.replace(/ /gi, '').split(',');
         return this;
     }
 

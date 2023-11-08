@@ -12,10 +12,10 @@ npm i project-rest-client
 create configuration file config.js
 
 ```
-import Project from 'project-rest-client';
+import Project_WS from "project-rest-client";
 
 
-let Wso = new Project.WS.connect({
+let Wso = new Project_WS.connect({
     //WSS host for LIVE watch, if not added then live watch not possible
     //wss_host: 'ws://80.235.7.34:6001',
     //fetch from REST API
@@ -42,10 +42,10 @@ export default Wso;
 create model file app/models/address.js
 
 ```
-import Project from 'project-rest-client';
+import Project_WS from "project-rest-client";
 import Wso from "../config";
 
-class Model extends Project.WS.model{
+class Model extends Project_WS.model{
 
     constructor(wso) {
 

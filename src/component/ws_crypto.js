@@ -1,6 +1,5 @@
 import React from 'react';
-//npm i crypto-js
-import CryptoJS from 'crypto-js';
+import CryptoES from 'crypto-es';
 import Base64 from './base64';
 import canJSON from "project-can-json";
 
@@ -39,13 +38,13 @@ export default class Ws_crypto {
             return {'data': null, mac: null};
 
         let key_string = Ws_crypto.mac_hash;
-        let iv_string = CryptoJS.lib.WordArray.random(16).toString();
+        let iv_string = CryptoES.lib.WordArray.random(16).toString();
         let mac_string = null;
         let encrypted_string = null;
 
-        let encHex = CryptoJS.enc.Hex;
-        let aes = CryptoJS.AES;
-        let Pkcs7 = CryptoJS.pad.Pkcs7;
+        let encHex = CryptoES.enc.Hex;
+        let aes = CryptoES.AES;
+        let Pkcs7 = CryptoES.pad.Pkcs7;
 
         // the key and iv should be 32 hex digits each, any hex digits you want, but it needs to be 32 on length each
         let key = encHex.parse(key_string);
@@ -62,9 +61,9 @@ export default class Ws_crypto {
         encrypted_string = aes.encrypt(data_string, key, {
             iv: iv,
             padding: Pkcs7,
-            mode: CryptoJS.mode.CBC
+            mode: CryptoES.mode.CBC
         }).toString();
-        mac_string = CryptoJS.HmacSHA256(encrypted_string, key).toString(CryptoJS.enc.Hex);
+        mac_string = CryptoES.HmacSHA256(encrypted_string, key).toString(CryptoES.enc.Hex);
 
         return {'data': data_string, 'mac': Base64.btoa(mac_string + iv_string)};
     }
@@ -88,9 +87,9 @@ export default class Ws_crypto {
         let iv_string = b64_string.substring(mac_length, mac_length + iv_length);
         let encrypted_string = null;
 
-        let encHex = CryptoJS.enc.Hex;
-        let aes = CryptoJS.AES;
-        let Pkcs7 = CryptoJS.pad.Pkcs7;
+        let encHex = CryptoES.enc.Hex;
+        let aes = CryptoES.AES;
+        let Pkcs7 = CryptoES.pad.Pkcs7;
 
         // the key and iv should be 32 hex digits each, any hex digits you want, but it needs to be 32 on length each
         let key = encHex.parse(key_string);
@@ -100,9 +99,9 @@ export default class Ws_crypto {
         encrypted_string = aes.encrypt(data_string, key, {
             iv: iv,
             padding: Pkcs7,
-            mode: CryptoJS.mode.CBC
+            mode: CryptoES.mode.CBC
         }).toString();
-        mac_verify = CryptoJS.HmacSHA256(encrypted_string, key).toString(CryptoJS.enc.Hex);
+        mac_verify = CryptoES.HmacSHA256(encrypted_string, key).toString(CryptoES.enc.Hex);
 
         if (mac_string !== mac_verify)
             return '';

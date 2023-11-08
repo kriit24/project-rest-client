@@ -15,7 +15,7 @@ class WS_model extends WS_stmt {
 
         super();
 
-        if( ws === undefined ){
+        if (ws === undefined) {
 
             console.error('project-rest-client ERROR: WS is undefined, this is caused by setting the configuration later then callid the model');
             return this;
@@ -89,7 +89,7 @@ class WS_model extends WS_stmt {
 
     insert(data) {
 
-        this.addPromise((resolve, reject) => {
+        this.addPromise((resolve, reject, data) => {
 
             let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
             let primaryKey = this.primaryKey;
@@ -105,13 +105,13 @@ class WS_model extends WS_stmt {
                     .send({'event': 'post', 'model': this.table, 'data': data});
             }
             resolve(true);
-        }, {});
+        }, Object.assign({}, data));
         this.runPromises();
     }
 
     save(data) {
 
-        this.addPromise((resolve, reject) => {
+        this.addPromise((resolve, reject, data) => {
 
             let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
             let primaryKey = this.primaryKey;
@@ -127,21 +127,21 @@ class WS_model extends WS_stmt {
             }
 
             resolve(true);
-        }, {});
+        }, Object.assign({}, data));
         this.runPromises();
     }
 
     delete(primary_id) {
 
-        this.addPromise((resolve, reject) => {
+        this.addPromise((resolve, reject, data) => {
 
             this
                 .fileGetContent(this.ws.channel, this.table)
                 .then(async (modelData) => {
 
-                    if (modelData[primary_id] !== undefined) {
+                    if (modelData[data.primary_id] !== undefined) {
 
-                        delete modelData[primary_id];
+                        delete modelData[data.primary_id];
 
                         //console.log('DELETE', deleteData);
                         await FileSystem.writeAsStringAsync(this.file(this.ws.channel, this.table), JSON.stringify(modelData));
@@ -149,7 +149,7 @@ class WS_model extends WS_stmt {
 
                     let primaryKey = this.primaryKey;
                     let deleteData = {};
-                    deleteData[primaryKey] = primary_id;
+                    deleteData[primaryKey] = data.primary_id;
 
                     let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
                     model_sync
@@ -161,7 +161,7 @@ class WS_model extends WS_stmt {
 
                     resolve(true);
                 });
-        }, {});
+        }, Object.assign({}, {primary_id: primary_id}));
         this.runPromises();
     }
 
@@ -170,10 +170,10 @@ class WS_model extends WS_stmt {
         let {column, join, use, where, order, limit} = this.getStmt();
         this.resetStmt();
 
-        this.addPromise((resolve, reject) => {
+        this.addPromise((resolve, reject, data) => {
 
-            //let {join, where, order, limit} = this.getStmt();
-            //this.resetStmt();
+            let {column, join, use, where, order, limit} = data;
+            this.setStmt(column, join, use, where, order, limit);
 
             new WS_fetchdata(this.table, this.primaryKey)
                 .setStmt(column, join, use, where, order, limit)
@@ -184,7 +184,7 @@ class WS_model extends WS_stmt {
                     callback(rows.length ? rows : []);
                     resolve(true);
                 });
-        }, {column: column, join: join, use: use, where: where, limit: limit, order: order});
+        }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, order: order}));
         this.runPromises();
     }
 
@@ -193,10 +193,10 @@ class WS_model extends WS_stmt {
         let {column, join, use, where, order, limit} = this.getStmt();
         this.resetStmt();
 
-        this.addPromise((resolve, reject) => {
+        this.addPromise((resolve, reject, data) => {
 
-            //let {join, where, order, limit} = this.getStmt();
-            //this.resetStmt();
+            let {column, join, use, where, order, limit} = data;
+            this.setStmt(column, join, use, where, order, limit);
 
             new WS_fetchdata(this.table, this.primaryKey)
                 .setStmt(column, join, use, where, order, limit)
@@ -207,7 +207,7 @@ class WS_model extends WS_stmt {
                     callback(rows.length ? rows[0] : {});
                     resolve(true);
                 });
-        }, {column: column, join: join, use: use, where: where, limit: limit, order: order});
+        }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, order: order}));
         this.runPromises();
     }
 
@@ -216,14 +216,8 @@ class WS_model extends WS_stmt {
         this.promises.push(
             function (callback, args) {
 
-                if (Object.keys(args).length) {
-
-                    let {column, join, use, where, order, limit} = args;
-                    this.setStmt(column, join, use, where, order, limit);
-                }
-
                 return new Promise((resolve, reject) => {
-                    callback(resolve, reject);
+                    callback(resolve, reject, args);
                 });
             }.bind(this, callback, args)
         );

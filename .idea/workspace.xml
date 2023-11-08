@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="columns added to fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="---&#10;columns added to OFFLINE fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])&#10;&#10;---&#10;offline use added&#10;&#10;---&#10;column fix&#10;&#10;---&#10;Readme update&#10;&#10;---&#10;CryptoJS changed with CryptoES">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_fetchdata.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_fetchdata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_crypto.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_crypto.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
     </list>
@@ -76,7 +78,11 @@
       <workItem from="1698122141830" duration="25000" />
       <workItem from="1698731076592" duration="2277000" />
       <workItem from="1698811519533" duration="10000" />
-      <workItem from="1698982020938" duration="742000" />
+      <workItem from="1698982020938" duration="777000" />
+      <workItem from="1699068352485" duration="733000" />
+      <workItem from="1699261917581" duration="22000" />
+      <workItem from="1699420841672" duration="139000" />
+      <workItem from="1699421915794" duration="789000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -186,7 +192,13 @@
       <option name="presentableId" value="LOCAL−00018" />
       <updated>1698807965136</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL−00019" summary="columns added to OFFLINE fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])&#10;&#10;AND &#10;&#10;offline use added">
+      <created>1698986527049</created>
+      <option name="number" value="LOCAL−00019" />
+      <option name="presentableId" value="LOCAL−00019" />
+      <updated>1698986527049</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +219,7 @@
     <MESSAGE value="use statement added fix" />
     <MESSAGE value="debug format updated" />
     <MESSAGE value="columns added to fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])" />
-    <option name="LAST_COMMIT_MESSAGE" value="columns added to fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])" />
+    <MESSAGE value="columns added to OFFLINE fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])&#10;&#10;AND &#10;&#10;offline use added" />
+    <option name="LAST_COMMIT_MESSAGE" value="columns added to OFFLINE fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])&#10;&#10;AND &#10;&#10;offline use added" />
   </component>
 </project>
