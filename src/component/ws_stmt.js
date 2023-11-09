@@ -42,6 +42,11 @@ class WS_stmt {
         return WS_config.ws;
     }
 
+    encrypt(data){
+
+        return Ws_crypto.sign(data);
+    }
+
     setTable(table) {
 
         this.table = table;

@@ -183,8 +183,8 @@ class WS_connect extends WS_stmt {
                         };
 
                         let mac = null;
-                        if (WS_config.conf.hash_key)
-                            mac = Ws_crypto.sign(body);
+                        if (WS_config.conf.hash_key && !body.hasOwnProperty('raw'))
+                            mac = this.encrypt(body);
 
                         if (debug || WS_config.conf.debug) {
 
@@ -337,8 +337,8 @@ class WS_connect extends WS_stmt {
                     if (isConnected) {
 
                         let mac = null;
-                        if (WS_config.conf.hash_key)
-                            mac = Ws_crypto.sign(body);
+                        if (WS_config.conf.hash_key && !body.hasOwnProperty('raw'))
+                            mac = this.encrypt(body);
 
                         if (debug || WS_config.conf.debug) {
 
