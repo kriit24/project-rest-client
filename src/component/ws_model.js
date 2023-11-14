@@ -17,7 +17,7 @@ class WS_model extends WS_stmt {
 
         if (ws === undefined) {
 
-            console.error('project-rest-client ERROR: WS is undefined, this is caused by setting the configuration later then callid the model');
+            console.error('project-rest-client ERROR: WS is undefined, this is caused by model is called before settings');
             return this;
         }
 

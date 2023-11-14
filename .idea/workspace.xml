@@ -7,8 +7,7 @@
     <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="---&#10;raw data added (no encryption)&#10;&#10;---&#10;putside data encryption added&#10;example: image.encrypt(json_data)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +81,8 @@
       <workItem from="1699421915794" duration="868000" />
       <workItem from="1699429850160" duration="562000" />
       <workItem from="1699442579818" duration="153000" />
+      <workItem from="1699503871720" duration="292000" />
+      <workItem from="1699962675056" duration="48000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -203,7 +204,13 @@
       <option name="presentableId" value="LOCAL−00020" />
       <updated>1699422749208</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL−00021" summary="---&#10;raw data added (no encryption)&#10;&#10;---&#10;putside data encryption added&#10;example: image.encrypt(json_data)">
+      <created>1699503953511</created>
+      <option name="number" value="LOCAL−00021" />
+      <option name="presentableId" value="LOCAL−00021" />
+      <updated>1699503953511</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,6 +233,7 @@
     <MESSAGE value="columns added to fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])" />
     <MESSAGE value="columns added to OFFLINE fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])&#10;&#10;AND &#10;&#10;offline use added" />
     <MESSAGE value="---&#10;columns added to OFFLINE fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])&#10;&#10;---&#10;offline use added&#10;&#10;---&#10;column fix&#10;&#10;---&#10;Readme update&#10;&#10;---&#10;CryptoJS changed with CryptoES" />
-    <option name="LAST_COMMIT_MESSAGE" value="---&#10;columns added to OFFLINE fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])&#10;&#10;---&#10;offline use added&#10;&#10;---&#10;column fix&#10;&#10;---&#10;Readme update&#10;&#10;---&#10;CryptoJS changed with CryptoES" />
+    <MESSAGE value="---&#10;raw data added (no encryption)&#10;&#10;---&#10;putside data encryption added&#10;example: image.encrypt(json_data)" />
+    <option name="LAST_COMMIT_MESSAGE" value="---&#10;raw data added (no encryption)&#10;&#10;---&#10;putside data encryption added&#10;example: image.encrypt(json_data)" />
   </component>
 </project>
