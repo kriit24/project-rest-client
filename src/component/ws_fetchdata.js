@@ -42,7 +42,7 @@ class WS_fetchdata extends WS_stmt {
 
     fetch(callback) {
 
-        let {column, join, use, where, order, limit} = this.getStmt();
+        let {column, join, use, where, group, order, limit} = this.getStmt();
         this.resetStmt();
 
         let join_relation = {};
@@ -73,7 +73,7 @@ class WS_fetchdata extends WS_stmt {
         this.ws
             //.debug()
             //.offline()
-            .setStmt(column, Object.keys(join_relation), Object.keys(use_relation), where, order, limit)
+            .setStmt(column, Object.keys(join_relation), Object.keys(use_relation), where, group, order, limit)
             .fetch(this.table)
             //fetch success
             .then((e) => {

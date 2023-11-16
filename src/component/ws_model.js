@@ -17,7 +17,7 @@ class WS_model extends WS_stmt {
 
         if (ws === undefined) {
 
-            console.error('project-rest-client ERROR: WS is undefined, this is caused by model is called before settings');
+            console.error('project-rest-client ERROR: WS is undefined, this is caused by setting the configuration later then callid the model');
             return this;
         }
 
@@ -167,16 +167,16 @@ class WS_model extends WS_stmt {
 
     fetchAll(callback) {
 
-        let {column, join, use, where, order, limit} = this.getStmt();
+        let {column, join, use, where, group, order, limit} = this.getStmt();
         this.resetStmt();
 
         this.addPromise((resolve, reject, data) => {
 
-            let {column, join, use, where, order, limit} = data;
-            this.setStmt(column, join, use, where, order, limit);
+            let {column, join, use, where, group, order, limit} = data;
+            this.setStmt(column, join, use, where, group, order, limit);
 
             new WS_fetchdata(this.table, this.primaryKey)
-                .setStmt(column, join, use, where, order, limit)
+                .setStmt(column, join, use, where, group, order, limit)
                 .setBelongsStmt(this.belongsStmt)
                 .setUseCallbackStmt(this.stmtUseCallback)
                 .fetch((rows) => {
@@ -184,22 +184,22 @@ class WS_model extends WS_stmt {
                     callback(rows.length ? rows : []);
                     resolve(true);
                 });
-        }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, order: order}));
+        }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, group: group, order: order}));
         this.runPromises();
     }
 
     fetch(callback) {
 
-        let {column, join, use, where, order, limit} = this.getStmt();
+        let {column, join, use, where, group, order, limit} = this.getStmt();
         this.resetStmt();
 
         this.addPromise((resolve, reject, data) => {
 
-            let {column, join, use, where, order, limit} = data;
-            this.setStmt(column, join, use, where, order, limit);
+            let {column, join, use, where, group, order, limit} = data;
+            this.setStmt(column, join, use, where, group, order, limit);
 
             new WS_fetchdata(this.table, this.primaryKey)
-                .setStmt(column, join, use, where, order, limit)
+                .setStmt(column, join, use, where, group, order, limit)
                 .setBelongsStmt(this.belongsStmt)
                 .setUseCallbackStmt(this.stmtUseCallback)
                 .fetch((rows) => {
@@ -207,7 +207,7 @@ class WS_model extends WS_stmt {
                     callback(rows.length ? rows[0] : {});
                     resolve(true);
                 });
-        }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, order: order}));
+        }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, group: group, order: order}));
         this.runPromises();
     }
 

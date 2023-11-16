@@ -13,6 +13,7 @@ class WS_stmt {
     stmtUse = [];
     stmtWhere = [];
     stmtLimit = [];
+    stmtGroup = [];
     stmtOrder = [];
     stmtDebug = false;
     stmtOffline = false;
@@ -139,12 +140,13 @@ class WS_stmt {
         return tmp;
     }
 
-    setStmt(column, join, use, where, order, limit) {
+    setStmt(column, join, use, where, group, order, limit) {
 
         this.stmtColumn = [];
         this.stmtJoin = [];
         this.stmtUse = [];
         this.stmtWhere = [];
+        this.stmtGroup = [];
         this.stmtOrder = [];
         this.stmtLimit = [];
 
@@ -169,6 +171,12 @@ class WS_stmt {
             });
         }
 
+        if (group !== undefined && group.length) {
+            group.map((value) => {
+                this.group(value)
+            });
+        }
+
         if (order !== undefined && order.length) {
             order.map((value) => {
                 this.order(value[0], value[1])
@@ -189,6 +197,7 @@ class WS_stmt {
             'use': this.stmtUse,
             'where': this.stmtWhere,
             'limit': this.stmtLimit,
+            'group': this.stmtGroup,
             'order': this.stmtOrder,
         };
     }
@@ -200,6 +209,7 @@ class WS_stmt {
         this.stmtUse = [];
         this.stmtWhere = [];
         this.stmtLimit = [];
+        this.stmtGroup = [];
         this.stmtOrder = [];
         this.stmtDebug = false;
         this.stmtOffline = false;
@@ -305,6 +315,12 @@ class WS_stmt {
             }
             return exists === Object.keys(where).length ? row : null;
         }, where);
+    }
+
+    group(group) {
+
+        this.stmtGroup.push(group);
+        return this;
     }
 
     order(column, order) {
