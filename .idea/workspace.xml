@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="group by added">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="1.1.8 is released">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/app/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/app/model/address.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/model/address.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/app/model/object.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/model/object.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +87,7 @@
       <workItem from="1699503871720" duration="292000" />
       <workItem from="1699962675056" duration="84000" />
       <workItem from="1700120745385" duration="1756000" />
-      <workItem from="1701670201548" duration="8500000" />
+      <workItem from="1701670201548" duration="9480000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -232,7 +227,13 @@
       <option name="presentableId" value="LOCAL−00023" />
       <updated>1700123407629</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL−00024" summary="1.1.8 is released">
+      <created>1701688295697</created>
+      <option name="number" value="LOCAL−00024" />
+      <option name="presentableId" value="LOCAL−00024" />
+      <updated>1701688295697</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,6 +259,7 @@
     <MESSAGE value="---&#10;raw data added (no encryption)&#10;&#10;---&#10;putside data encryption added&#10;example: image.encrypt(json_data)" />
     <MESSAGE value="error updated" />
     <MESSAGE value="group by added" />
-    <option name="LAST_COMMIT_MESSAGE" value="group by added" />
+    <MESSAGE value="1.1.8 is released" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.1.8 is released" />
   </component>
 </project>
