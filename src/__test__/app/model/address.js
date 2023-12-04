@@ -1,7 +1,7 @@
-import Project_WS from '../../../index';
+import ProjectRest from '../../../index';
 import Wso from "../config";
 
-class Model extends Project_WS.model{
+class Model extends ProjectRest.model{
 
     constructor(wso) {
 
