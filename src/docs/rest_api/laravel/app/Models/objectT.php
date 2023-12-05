@@ -55,8 +55,17 @@ class objectT extends Model
         );
     }
 
+    //regular join
     public function address()
     {
         return $this->belongsTo(address::class, 'object_address_id', 'address_id', null);
+    }
+
+    //use query
+    public function address_join()
+    {
+        $this->select($this->fillable)
+            ->join("address", "address_id", "=", "object_address_id");
+        return $this;
     }
 }

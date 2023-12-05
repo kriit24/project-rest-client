@@ -4,8 +4,8 @@ SELECT
 ```
 object
 .select()//this resets all previous objects
+.use('address_join')//use pre defined REST query
 .with('address')//join
-.use('address')//use pre defined REST query
 .ative()//pre defined model function
 .where('object_id', 1)
 .where('object_id', '>=', 1)
@@ -13,8 +13,9 @@ object
 
     q.where('address_address', 'LIKE', '%' + address_search + '%');
 })
+.order('object_id', 'DESC')
+.group('object_parent_id')
 .limit(2)
-.order('order_id', 'DESC')
 .fetchAll(async (rows) => {
 
     //console.log('');
