@@ -73,3 +73,7 @@ react-native request will be - https://your_domain.com/fetch/{database_name_wher
             'fetch'       => PDO::FETCH_ASSOC,
         ],
 ```
+
+
+debug query - when u send request to laravel api with header "debug=true" then it shows request query not data 
+
