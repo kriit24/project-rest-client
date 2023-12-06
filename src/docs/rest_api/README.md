@@ -18,7 +18,7 @@ config(['auth.hash.key' => $user_key]);
 ```
 
 
-set config "database.model"
+set config/database.php key "model"
 
 ```
 'model' => function($name = null, $default = null){
@@ -59,7 +59,7 @@ set config "database.model"
     },
 ```
 
-and "database.connections.database_name_where_api_connects"
+and config/database.php key "connections.database_name_where_api_connects" value as example  
 react-native request will be - https://your_domain.com/fetch/{database_name_where_api_connects}/{model}
 
 ```
@@ -75,5 +75,5 @@ react-native request will be - https://your_domain.com/fetch/{database_name_wher
 ```
 
 
-debug query - when u send request to laravel api with header "debug=true" then it shows request query not data 
+debug query - when u send request to laravel api with header "debug=true" then it shows mysql query not data 
 
