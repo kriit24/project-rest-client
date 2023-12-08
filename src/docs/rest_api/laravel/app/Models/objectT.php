@@ -25,6 +25,7 @@ class objectT extends Model
 
     public $timestamps = false;
 
+    //inserting, updating, inserted, updated, deleting, deleted
     protected $dispatchesEvents = [
         'inserted' => ObjectAfterInsert::class,
     ];

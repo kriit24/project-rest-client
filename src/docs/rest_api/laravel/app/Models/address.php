@@ -32,6 +32,7 @@ class address extends Model
 
     public $timestamps = false;
 
+    //inserting, updating, inserted, updated, deleting, deleted
     protected $dispatchesEvents = [
         'inserting' => AddressBeforeInsert::class,
     ];

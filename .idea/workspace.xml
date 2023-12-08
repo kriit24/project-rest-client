@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="docs updated - after and before delete example">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="docs updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/AddressBeforeInsert.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/AddressBeforeInsert.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/TableRelation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/TableRelation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/address.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/address.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/objectT.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/objectT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Pusher/MysqlDelete.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Pusher/MysqlDelete.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Pusher/MysqlPush.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Pusher/MysqlPush.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,27 +31,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/component&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "last_opened_file_path": "C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/docs/rest_api/laravel/app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest_api\laravel\app" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\component" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\app" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\app\Models" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\routes" />
-      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest_api\laravel\app\Models" />
@@ -98,7 +100,8 @@
       <workItem from="1702023590357" duration="950000" />
       <workItem from="1702030950696" duration="496000" />
       <workItem from="1702031573496" duration="46000" />
-      <workItem from="1702031790802" duration="47000" />
+      <workItem from="1702031790802" duration="273000" />
+      <workItem from="1702039148212" duration="168000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -298,7 +301,13 @@
       <option name="presentableId" value="LOCAL−00033" />
       <updated>1702031604598</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL−00034" summary="docs updated">
+      <created>1702032061453</created>
+      <option name="number" value="LOCAL−00034" />
+      <option name="presentableId" value="LOCAL−00034" />
+      <updated>1702032061453</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,9 +335,9 @@
     <MESSAGE value="group by added" />
     <MESSAGE value="1.1.8 is released" />
     <MESSAGE value="1.1.9 is released" />
-    <MESSAGE value="docs updated" />
     <MESSAGE value="insert, save, delete adds uniqueid on to the data" />
     <MESSAGE value="docs updated - after and before delete example" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs updated - after and before delete example" />
+    <MESSAGE value="docs updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs updated" />
   </component>
 </project>

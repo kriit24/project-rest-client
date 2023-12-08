@@ -32,12 +32,31 @@ class MysqlDelete
         $reflectionProperty = $reflectionClass->getProperty('fillable');
         $fillable = $reflectionProperty->getValue(new $class);
 
+        $dispatchesEvents = null;
+        if ($reflectionClass->hasProperty('dispatchesEvents')) {
+
+            $reflectionProperty = $reflectionClass->getProperty('dispatchesEvents');
+            $dispatchesEvents = $reflectionProperty->getValue(new $class);
+        }
+
         $data = $payload['message'];
         if ($data[$primaryKey]) {
+
+            if (isset($dispatchesEvents['deleting'])) {
+
+                $dispatcher = $dispatchesEvents['deleting'];
+                new $dispatcher($data);
+            }
 
             $d = Mysql::select("DELETE FROM `" . $table . "` WHERE `" . $primaryKey . "`= ? RETURNING " . implode(',', $fillable), [$data[$primaryKey]]);
 
             if (!empty($d)) {
+
+                if (isset($dispatchesEvents['deleted'])) {
+
+                    $dispatcher = $dispatchesEvents['deleted'];
+                    new $dispatcher($data, $d);
+                }
 
                 return array_merge((array)$d[0], ['trigger' => 'delete']);
             }

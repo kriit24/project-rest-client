@@ -143,12 +143,12 @@ class MysqlPush
                 if (isset($dispatchesEvents['inserted'])) {
 
                     $dispatcher = $dispatchesEvents['inserted'];
-                    new $dispatcher($bindings, $d);
+                    new $dispatcher($values, $d);
                 }
                 if (isset($dispatchesEvents['updated'])) {
 
                     $dispatcher = $dispatchesEvents['updated'];
-                    new $dispatcher($bindings, $d);
+                    new $dispatcher($values, $d);
                 }
             }
         }
