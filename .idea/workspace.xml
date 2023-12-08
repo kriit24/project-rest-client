@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="docs updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Broadcasting/MongoBroadcast.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Broadcasting/DBBroadcast.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/index.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/index.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,27 +30,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/docs/rest api/laravel/app&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "last_opened_file_path": "C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/component",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\component" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\app" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\app\Models" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\routes" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api" />
-      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\live" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -91,7 +92,8 @@
       <workItem from="1701670201548" duration="9518000" />
       <workItem from="1701769259319" duration="391000" />
       <workItem from="1701840073257" duration="1490000" />
-      <workItem from="1702005742556" duration="122000" />
+      <workItem from="1702005742556" duration="141000" />
+      <workItem from="1702023590357" duration="557000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -267,7 +269,13 @@
       <option name="presentableId" value="LOCAL−00029" />
       <updated>1701841577901</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL−00030" summary="docs updated">
+      <created>1702005875798</created>
+      <option name="number" value="LOCAL−00030" />
+      <option name="presentableId" value="LOCAL−00030" />
+      <updated>1702005875798</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

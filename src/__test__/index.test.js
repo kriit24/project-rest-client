@@ -49,6 +49,8 @@ export default class MainApp extends React.Component {
             });
         */
 
+        //object.insert({});
+
         object
             .select()
             .with('address')
