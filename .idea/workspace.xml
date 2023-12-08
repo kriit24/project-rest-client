@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="insert, save, delete adds uniqueid on to the data">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="docs updated - after and before delete example">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/address.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/address.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/objectT.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/objectT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/table_relation.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/table_relation.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +50,9 @@
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\routes" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest_api\laravel\app\Models" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -93,7 +95,8 @@
       <workItem from="1701840073257" duration="1490000" />
       <workItem from="1702005742556" duration="141000" />
       <workItem from="1702023590357" duration="950000" />
-      <workItem from="1702030950696" duration="375000" />
+      <workItem from="1702030950696" duration="496000" />
+      <workItem from="1702031573496" duration="23000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -281,7 +284,13 @@
       <option name="presentableId" value="LOCAL−00031" />
       <updated>1702024439808</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL−00032" summary="docs updated - after and before delete example">
+      <created>1702031447403</created>
+      <option name="number" value="LOCAL−00032" />
+      <option name="presentableId" value="LOCAL−00032" />
+      <updated>1702031447403</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,6 +320,7 @@
     <MESSAGE value="1.1.9 is released" />
     <MESSAGE value="docs updated" />
     <MESSAGE value="insert, save, delete adds uniqueid on to the data" />
-    <option name="LAST_COMMIT_MESSAGE" value="insert, save, delete adds uniqueid on to the data" />
+    <MESSAGE value="docs updated - after and before delete example" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs updated - after and before delete example" />
   </component>
 </project>
