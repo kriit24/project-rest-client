@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Events\AddressBeforeInsert;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,6 +31,10 @@ class address extends Model
     ];
 
     public $timestamps = false;
+
+    protected $dispatchesEvents = [
+        'inserting' => AddressBeforeInsert::class,
+    ];
 
 
     protected function addressAdsOid(): Attribute

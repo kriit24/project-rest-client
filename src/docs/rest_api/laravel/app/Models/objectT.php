@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Events\ObjectAfterInsert;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,11 @@ class objectT extends Model
     ];
 
     public $timestamps = false;
+
+    protected $dispatchesEvents = [
+        'inserted' => ObjectAfterInsert::class,
+    ];
+
     protected function objectKeyName(): Attribute
     {
         return Attribute::make(
