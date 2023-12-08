@@ -31,7 +31,7 @@ Route::middleware([\App\Http\Middleware\Authenticate::class/*create your own aut
 
         if (\App\Http\Requests\ValidateRequest::Broadcast($db, $model, $request)) {
 
-            $event = new \App\Broadcasting\MongoBroadcast(
+            $event = new \App\Broadcasting\DBBroadcast(
                 \App\Pusher\MysqlPush::class
             );
             $data = $event->broadcast($db, $model, $request);
@@ -45,7 +45,7 @@ Route::middleware([\App\Http\Middleware\Authenticate::class/*create your own aut
 
         if (\App\Http\Requests\ValidateRequest::Delete($db, $model, $request)) {
 
-            $event = new \App\Broadcasting\MongoBroadcast(
+            $event = new \App\Broadcasting\DBBroadcast(
                 \App\Pusher\MysqlDelete::class
             );
             $data = $event->broadcast($db, $model, $request);
@@ -59,7 +59,7 @@ Route::middleware([\App\Http\Middleware\Authenticate::class/*create your own aut
 
         if (\App\Http\Requests\ValidateRequest::Fetch($db, $model, $request)) {
 
-            $event = new \App\Broadcasting\MongoBroadcast(
+            $event = new \App\Broadcasting\DBBroadcast(
                 \App\Getter\MysqlGetter::class
             );
             $data = $event->fetch($db, $model, $request);

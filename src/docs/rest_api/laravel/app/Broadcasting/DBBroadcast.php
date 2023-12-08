@@ -6,7 +6,7 @@ namespace App\Broadcasting;
 use Illuminate\Broadcasting\BroadcastException;
 use Pusher\ApiErrorException;
 
-class MongoBroadcast
+class DBBroadcast
 {
     private $pusher;
 
