@@ -3,8 +3,6 @@ import sync from "./ws_sync";
 import WS_stmt from "./ws_stmt";
 import WS_fetchdata from "./ws_fetchdata";
 import WS_config from "./ws_config";
-import unique_id from "./unique_id";
-import Base64 from "./base64";
 
 let onPromises = {};
 
@@ -91,7 +89,7 @@ class WS_model extends WS_stmt {
 
     insert(data) {
 
-        let uniqueId = Base64.btoa(this.table + '_insert_' + unique_id());
+        let uniqueId = this.unique_id(this.table);
         data['data_unique_id'] = uniqueId;
 
         this.addPromise((resolve, reject, data) => {
@@ -118,9 +116,6 @@ class WS_model extends WS_stmt {
 
     save(data) {
 
-        let uniqueId = Base64.btoa(this.table + '_save_' + unique_id());
-        data['data_unique_id'] = uniqueId;
-
         this.addPromise((resolve, reject, data) => {
 
             let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
@@ -139,13 +134,9 @@ class WS_model extends WS_stmt {
             resolve(true);
         }, Object.assign({}, data));
         this.runPromises();
-
-        return uniqueId;
     }
 
     delete(primary_id) {
-
-        let uniqueId = Base64.btoa(this.table + '_save_' + unique_id());
 
         this.addPromise((resolve, reject, data) => {
 
@@ -164,7 +155,6 @@ class WS_model extends WS_stmt {
                     let primaryKey = this.primaryKey;
                     let deleteData = {};
                     deleteData[primaryKey] = data.primary_id;
-                    deleteData['data_unique_id'] = uniqueId;
 
                     let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
                     model_sync
@@ -178,8 +168,6 @@ class WS_model extends WS_stmt {
                 });
         }, Object.assign({}, {primary_id: primary_id}));
         this.runPromises();
-
-        return uniqueId;
     }
 
     fetchAll(callback) {

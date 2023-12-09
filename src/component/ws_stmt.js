@@ -2,6 +2,8 @@ import WS_config from "./ws_config";
 import * as FileSystem from "expo-file-system";
 import Ws_crypto from "./ws_crypto";
 import canJSON from "project-can-json";
+import Base64 from "./base64";
+import unique_id from "./unique_id";
 
 class WS_stmt {
 
@@ -43,7 +45,7 @@ class WS_stmt {
         return WS_config.ws;
     }
 
-    encrypt(data){
+    encrypt(data) {
 
         return Ws_crypto.sign(data);
     }
@@ -76,6 +78,11 @@ class WS_stmt {
 
         return this.stmtCallback !== undefined ? this.stmtCallback : () => {
         };
+    }
+
+    unique_id(prefix) {
+
+        return Base64.btoa(prefix + Math.floor(new Date().getTime() / 1000) + unique_id());
     }
 
     debug() {
@@ -250,7 +257,7 @@ class WS_stmt {
     use(method) {
 
         this.stmtUse.push(method);
-        if( this.stmtUseCallback === undefined )
+        if (this.stmtUseCallback === undefined)
             this.stmtUseCallback = {};
 
         if (typeof this[method] === "function") {
