@@ -90,7 +90,6 @@ class WS_model extends WS_stmt {
     insert(data) {
 
         let uniqueId = this.unique_id(this.table);
-        data['data_unique_id'] = uniqueId;
 
         this.addPromise((resolve, reject, data) => {
 
@@ -108,7 +107,7 @@ class WS_model extends WS_stmt {
                     .send({'event': 'post', 'model': this.table, 'data': data});
             }
             resolve(true);
-        }, Object.assign({}, data));
+        }, Object.assign(Object.assign({'data_unique_id': null}, data), {'data_unique_id': uniqueId}));
         this.runPromises();
 
         return uniqueId;
