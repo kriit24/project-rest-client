@@ -25,6 +25,23 @@ class TableRelation
 
     public static function fetch($unique_id)
     {
+        $res = self::getData($unique_id);
+        $wait = 5;//seconds
+
+        if (empty($res)) {
+
+            for ($i = 0; $i <= $wait; $i++) {
+
+                sleep(1);
+                $res = self::getData($unique_id);
+                if( !empty($res) ) break;
+            }
+        }
+        return $res;
+    }
+
+    private static function getData($unique_id)
+    {
         return Mysql::table('table_relation')->where('table_relation_unique_id', $unique_id)->orderBy("table_relation_id", "DESC")->first();
     }
 }
