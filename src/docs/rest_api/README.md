@@ -77,3 +77,8 @@ react-native request will be - https://your_domain.com/fetch/{database_name_wher
 
 debug query - when u send request to laravel api with header "debug=true" then it shows mysql query not data 
 
+
+
+### SEE MORE DOCS  
+
+[Insert relational data](/Insert_relational_data.md)

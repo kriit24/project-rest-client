@@ -11,9 +11,12 @@ class AddressBeforeInsert
         if (isset($bindings['table_relation_unique_id'])) {
 
             $relation = TableRelation::fetch($bindings['table_relation_unique_id']);
-            //die(pre($relation));
-            $bindings['image_table'] = $relation->table_relation_table_name;
-            $bindings['image_table_id'] = $relation->table_relation_table_id;
+            if( !empty($relation) ) {
+
+                //die(pre($relation));
+                $bindings['image_table'] = $relation->table_relation_table_name;
+                $bindings['image_table_id'] = $relation->table_relation_table_id;
+            }
         }
     }
 }
