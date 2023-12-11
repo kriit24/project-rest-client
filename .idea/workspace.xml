@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="docs updated">
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/app/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/index.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/index.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/query/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/query/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/laravel/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +108,9 @@
       <workItem from="1702092351855" duration="994000" />
       <workItem from="1702093392640" duration="11000" />
       <workItem from="1702093470381" duration="741000" />
-      <workItem from="1702095429825" duration="1321000" />
+      <workItem from="1702095429825" duration="1798000" />
+      <workItem from="1702274567662" duration="351000" />
+      <workItem from="1702280988846" duration="2564000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -337,7 +346,13 @@
       <option name="presentableId" value="LOCAL−00039" />
       <updated>1702096710077</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL−00040" summary="docs updated">
+      <created>1702096771634</created>
+      <option name="number" value="LOCAL−00040" />
+      <option name="presentableId" value="LOCAL−00040" />
+      <updated>1702096771634</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

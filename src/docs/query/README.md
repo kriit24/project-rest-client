@@ -61,10 +61,9 @@ SAVE
 
 ```
 object.save({
-    object_id: 5000,//primary id is required
     object_address_id: 5000,
     object_name: 'five thousant'
-});
+}, 5000);
 ```
 
 DELETE

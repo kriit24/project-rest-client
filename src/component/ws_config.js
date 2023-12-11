@@ -7,6 +7,7 @@ class WS_config{
         wss_host: undefined,
         fetch: undefined,
         post: undefined,
+        put: undefined,
         delete: undefined,
         error: undefined,
         channel: undefined,

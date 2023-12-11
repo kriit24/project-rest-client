@@ -113,25 +113,28 @@ class WS_model extends WS_stmt {
         return uniqueId;
     }
 
-    save(data) {
+    save(data, primary_id) {
+
+        let d = Object.assign({}, data);
+        d[this.primaryKey] = +primary_id;
 
         this.addPromise((resolve, reject, data) => {
 
             let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
             let primaryKey = this.primaryKey;
 
-            if (data[primaryKey] !== undefined) {
+            if (data[primaryKey] !== undefined && data[primaryKey]) {
 
                 model_sync
                     .setCallback((response) => {
 
                         model_sync.sync();
                     })
-                    .send({'event': 'post', 'model': this.table, 'data': data});
+                    .send({'event': 'put', 'model': this.table, 'data': data});
             }
 
             resolve(true);
-        }, Object.assign({}, data));
+        }, d);
         this.runPromises();
     }
 

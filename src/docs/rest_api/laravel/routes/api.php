@@ -41,6 +41,20 @@ Route::middleware([\App\Http\Middleware\Authenticate::class/*create your own aut
         return response(['status' => 'error', 'message' => 'POST error:' . \App\Http\Requests\ValidateRequest::getError()], 406);
     });
 
+    Route::post('/put/{db}/{model}', function ($db, $model, Request $request) {
+
+        if (\App\Http\Requests\ValidateRequest::Broadcast($db, $model, $request)) {
+
+            $event = new \App\Broadcasting\DBBroadcast(
+                \App\Pusher\MysqlPush::class
+            );
+            $data = $event->broadcast($db, $model, $request);
+
+            return response(['status' => 'ok', 'count' => !empty($data) ? 1 : 0, 'data' => $data]);
+        }
+        return response(['status' => 'error', 'message' => 'POST error:' . \App\Http\Requests\ValidateRequest::getError()], 406);
+    });
+
     Route::post('/delete/{db}/{model}', function ($db, $model, Request $request) {
 
         if (\App\Http\Requests\ValidateRequest::Delete($db, $model, $request)) {

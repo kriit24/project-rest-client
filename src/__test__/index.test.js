@@ -20,10 +20,9 @@ export default class MainApp extends React.Component {
 
         /*
         object.save({
-            object_id: 5000,
             object_address_id: 5000,
             object_name: 'five thousant'
-        });
+        }, 5000);
 
         object.delete(5000);
 
