@@ -4,9 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="primary id added as second parameter to the save method">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="doc updated">
+      <change beforePath="$PROJECT_DIR$/.idea/project-rest-client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/project-rest-client.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/Insert_relational_data.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Broadcasting/DBBroadcast.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Component/Crypto.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Getter/MysqlGetter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Http/Middleware/VerifyPostMac.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Http/Requests/MacRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Http/Requests/ValidateRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/AddressBeforeInsert.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/TableRelation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/address.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/table_relation.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Pusher/MysqlDelete.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Pusher/MysqlPush.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/routes/api.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +121,9 @@
       <workItem from="1702095429825" duration="1798000" />
       <workItem from="1702274567662" duration="351000" />
       <workItem from="1702280988846" duration="2644000" />
-      <workItem from="1702386163996" duration="60000" />
+      <workItem from="1702386163996" duration="103000" />
+      <workItem from="1703052156931" duration="976000" />
+      <workItem from="1703217911916" duration="1360000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -353,14 +371,25 @@
       <option name="presentableId" value="LOCAL−00041" />
       <updated>1702284430310</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL−00042" summary="doc updated">
+      <created>1702386239485</created>
+      <option name="number" value="LOCAL−00042" />
+      <option name="presentableId" value="LOCAL−00042" />
+      <updated>1702386239485</updated>
+    </task>
+    <task id="LOCAL−00043" summary="doc updated">
+      <created>1703218140321</created>
+      <option name="number" value="LOCAL−00043" />
+      <option name="presentableId" value="LOCAL−00043" />
+      <updated>1703218140321</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="gitignore updated" />
     <MESSAGE value="AES-128-CBC data transfer added" />
     <MESSAGE value="custom updated_at column definition added" />
     <MESSAGE value="minor fixes" />
@@ -385,6 +414,7 @@
     <MESSAGE value="unique_id updated" />
     <MESSAGE value="docs updated" />
     <MESSAGE value="primary id added as second parameter to the save method" />
-    <option name="LAST_COMMIT_MESSAGE" value="primary id added as second parameter to the save method" />
+    <MESSAGE value="doc updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="doc updated" />
   </component>
 </project>

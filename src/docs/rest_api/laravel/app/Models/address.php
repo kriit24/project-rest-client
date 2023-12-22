@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Events\AddressBeforeInsert;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class address extends Model
@@ -32,17 +31,7 @@ class address extends Model
 
     public $timestamps = false;
 
-    //inserting, updating, inserted, updated, deleting, deleted
     protected $dispatchesEvents = [
         'inserting' => AddressBeforeInsert::class,
     ];
-
-
-    protected function addressAdsOid(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => strtolower(str_replace([' ', ',', '.'], '', $value)),
-            set: fn ($value) => strtolower(str_replace([' ', ',', '.'], '', $value)),
-        );
-    }
 }
