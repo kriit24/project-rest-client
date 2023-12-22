@@ -73,4 +73,4 @@ address.insert({
 
 
 ## Example in laravel folder  
-[click me](/laravel)
+[click me](https://github.com/kriit24/project-rest-client/tree/master/src/docs/rest_api/laravel)

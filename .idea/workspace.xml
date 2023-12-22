@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="doc updated">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="docs updated">
       <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/docs/rest_api/Insert_relational_data.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/Insert_relational_data.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +107,7 @@
       <workItem from="1702280988846" duration="2644000" />
       <workItem from="1702386163996" duration="103000" />
       <workItem from="1703052156931" duration="976000" />
-      <workItem from="1703217911916" duration="1691000" />
+      <workItem from="1703217911916" duration="1733000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -375,7 +373,13 @@
       <option name="presentableId" value="LOCAL−00044" />
       <updated>1703219396412</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL−00045" summary="docs updated">
+      <created>1703219646307</created>
+      <option name="number" value="LOCAL−00045" />
+      <option name="presentableId" value="LOCAL−00045" />
+      <updated>1703219646307</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -404,9 +408,9 @@
     <MESSAGE value="insert, save, delete adds uniqueid on to the data" />
     <MESSAGE value="docs updated - after and before delete example" />
     <MESSAGE value="unique_id updated" />
-    <MESSAGE value="docs updated" />
     <MESSAGE value="primary id added as second parameter to the save method" />
     <MESSAGE value="doc updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="doc updated" />
+    <MESSAGE value="docs updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs updated" />
   </component>
 </project>
