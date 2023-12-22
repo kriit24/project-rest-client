@@ -70,3 +70,7 @@ address.insert({
     'address_name': 'this is address name',
 });
 ```
+
+
+## Example in laravel folder  
+[click me](/laravel)

@@ -1,7 +1,5 @@
 ### LARAVEL MYSQL REST API
 
-See full example in laravel folder
-
 debug query - when u send request to laravel api with header "debug=true" then it shows mysql query not data 
 
 
