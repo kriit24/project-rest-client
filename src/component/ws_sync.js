@@ -183,6 +183,8 @@ class sync extends WS_stmt {
 
     send(row) {
 
+        let priv = function(row){
+
         this.ws
             //.offline()
             .setData(row)
@@ -198,7 +200,7 @@ class sync extends WS_stmt {
             .catch(async (error) => {
 
                 let callback = this.ws.getCallback();
-                let tmp = this.ws.getData();
+                    let tmp = row;
                 let date = new Date();
 
                 let cacheData = canJSON(await FileSystem.readAsStringAsync(this.cacheFile));
@@ -219,6 +221,9 @@ class sync extends WS_stmt {
                 }
                 callback(error);
             });
+        };
+        priv = priv.bind(this, row);
+        priv();
     }
 
     async cacheSend() {

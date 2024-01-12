@@ -137,6 +137,12 @@ class WS_connect extends WS_stmt {
         WS_config.conn = undefined;
     }
 
+    live(){
+
+        //https://medium.com/@jsbeaudry/implementing-server-sent-events-for-react-native-with-the-chatgpt-3-5-turbo-api-b692a9d86a2f
+        //https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
+    }
+
 
     listen(table, callback) {
 
