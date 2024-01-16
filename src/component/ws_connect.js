@@ -3,7 +3,6 @@ import NetInfo from "@react-native-community/netinfo";
 import WS_stmt from "./ws_stmt";
 import WS_config from "./ws_config";
 import canJSON from 'project-can-json';
-import Ws_crypto from "./ws_crypto";
 
 class WS_connect extends WS_stmt {
 

@@ -10,6 +10,8 @@ let Wso = new ProjectRest.connect({
     post: 'https://haldus.projectpartner.ee/wss.php/post_server',
     //put to REST API
     put: 'https://haldus.projectpartner.ee/wss.php/put_server',
+    //push to REST API
+    push: 'https://haldus.projectpartner.ee/wss.php/push_server',
     //delete to REST API
     delete: 'https://haldus.projectpartner.ee/wss.php/delete_server',
     //error to REST API

@@ -3,6 +3,7 @@ import sync from "./ws_sync";
 import WS_stmt from "./ws_stmt";
 import WS_fetchdata from "./ws_fetchdata";
 import WS_config from "./ws_config";
+import foreach from "./foreach";
 
 let onPromises = {};
 
@@ -113,17 +114,32 @@ class WS_model extends WS_stmt {
         return uniqueId;
     }
 
-    save(data, primary_id) {
+    //.update({set: 1}, primary_id);
+    //.update({set: 1}, {'key': 'value'});
+    //.where().update({set: 1});
+    //.whereRaw().update({set: 1});
+
+    update(data, primary_id) {
 
         let d = Object.assign({}, data);
-        d[this.primaryKey] = +primary_id;
+        let w = [];
+        if (primary_id === undefined) {
+            w = this.stmtWhere;
+        } else if (typeof primary_id === 'object' && !Array.isArray(primary_id)) {
+
+            foreach(primary_id, function (k, v) {
+
+                w.push([k, '=', v]);
+            })
+        } else {
+            w.push([this.primaryKey, '=', +primary_id]);
+        }
 
         this.addPromise((resolve, reject, data) => {
 
             let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
-            let primaryKey = this.primaryKey;
 
-            if (data[primaryKey] !== undefined && data[primaryKey]) {
+            if (data.where !== undefined && data.where !== null) {
 
                 model_sync
                     .setCallback((response) => {
@@ -134,7 +150,29 @@ class WS_model extends WS_stmt {
             }
 
             resolve(true);
-        }, d);
+        }, {'set': d, 'where': w});
+        this.runPromises();
+    }
+
+    upsert(data) {
+
+        this.addPromise((resolve, reject, data) => {
+
+            let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
+            let primaryKey = this.primaryKey;
+
+            if (data[primaryKey] !== undefined) {
+
+                model_sync
+                    .setCallback((response) => {
+
+                        model_sync.sync();
+                    })
+                    .send({'event': 'push', 'model': this.table, 'data': data});
+            }
+
+            resolve(true);
+        }, Object.assign({}, data));
         this.runPromises();
     }
 

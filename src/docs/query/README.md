@@ -57,13 +57,34 @@ object.insert({
 });
 ```
 
-SAVE
+UPDATE
 
 ```
-object.save({
+object.update({
     object_address_id: 5000,
     object_name: 'five thousant'
-}, 5000);
+}, 5000/*primary id*/);
+
+object.update({
+    object_address_id: 5000,
+    object_name: 'five thousant'
+}, {'object_id': 5000, 'object_address_id': 5000});
+
+object.where({'object_id': 5000}).update({
+    object_address_id: 5000,
+    object_name: 'five thousant'
+});
+```
+
+
+UPSERT
+
+```
+object.upsert({
+    object_id: 5000,
+    object_address_id: 5000,
+    object_name: 'five thousant'
+});
 ```
 
 DELETE

@@ -5,6 +5,7 @@ import WS_fetchdata from "./ws_fetchdata";
 import WS_config from "./ws_config";
 import NetInfo from "@react-native-community/netinfo";
 import canJSON from "project-can-json";
+import callback from "./callback";
 
 class sync extends WS_stmt {
 
@@ -183,47 +184,45 @@ class sync extends WS_stmt {
 
     send(row) {
 
-        let priv = function(row){
+        callback(function (row) {
 
-        this.ws
-            //.offline()
-            .setData(row)
-            .setCallback(this.getCallback())
-            .send(row.event, row.model, row.data)
-            //if everything is ok then do nothing
-            .then((response) => {
+            this.ws
+                //.offline()
+                .setData(row)
+                .setCallback(this.getCallback())
+                .send(row.event, row.model, row.data)
+                //if everything is ok then do nothing
+                .then((response) => {
 
-                let callback = this.ws.getCallback();
-                callback(response);
-            })
-            //if something is wrong then store data
-            .catch(async (error) => {
+                    let callback = this.ws.getCallback();
+                    callback(response);
+                })
+                //if something is wrong then store data
+                .catch(async (error) => {
 
-                let callback = this.ws.getCallback();
+                    let callback = this.ws.getCallback();
                     let tmp = row;
-                let date = new Date();
+                    let date = new Date();
 
-                let cacheData = canJSON(await FileSystem.readAsStringAsync(this.cacheFile));
-                cacheData[date.getTime()] = tmp;
-                await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify(cacheData));
+                    let cacheData = canJSON(await FileSystem.readAsStringAsync(this.cacheFile));
+                    cacheData[date.getTime()] = tmp;
+                    await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify(cacheData));
 
-                if (Object.keys(cacheData).length >= WS_config.conf.cache_length) {
+                    if (Object.keys(cacheData).length >= WS_config.conf.cache_length) {
 
-                    let cacheKeys = Object.keys(cacheData).slice(0, (Object.keys(cacheData).length - WS_config.conf.cache_length));
-                    if (cacheKeys.length) {
+                        let cacheKeys = Object.keys(cacheData).slice(0, (Object.keys(cacheData).length - WS_config.conf.cache_length));
+                        if (cacheKeys.length) {
 
-                        cacheKeys.forEach((key) => {
+                            cacheKeys.forEach((key) => {
 
-                            delete cacheData[key];
-                        });
-                        await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify(cacheData));
+                                delete cacheData[key];
+                            });
+                            await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify(cacheData));
+                        }
                     }
-                }
-                callback(error);
-            });
-        };
-        priv = priv.bind(this, row);
-        priv();
+                    callback(error);
+                });
+        }, this, row);
     }
 
     async cacheSend() {
