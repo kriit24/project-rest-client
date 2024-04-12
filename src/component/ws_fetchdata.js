@@ -51,10 +51,13 @@ class WS_fetchdata extends WS_stmt {
 
             join.forEach((v, k) => {
 
+                /*
                 if (this.belongsStmt[v] !== undefined) {
 
                     join_relation[v] = this.belongsStmt[v];
                 }
+                */
+                join_relation[v] = [v, null, null];
             });
         }
 
@@ -63,10 +66,13 @@ class WS_fetchdata extends WS_stmt {
 
             use.forEach((v, k) => {
 
+                /*
                 if (this.belongsStmt[v] !== undefined) {
 
                     use_relation[v] = this.belongsStmt[v];
                 }
+                 */
+                use_relation[v] = [v, null, null];
             });
         }
 
