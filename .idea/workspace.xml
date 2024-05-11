@@ -4,17 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="cache data overwrite fix">
-      <change afterPath="$PROJECT_DIR$/src/component/callback.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/foreach.js" afterDir="false" />
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="no need for belongsTo relation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/app/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sync.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/query/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/query/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/AddressBeforeInsert.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/ObjectAfterInsert.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/TableRelation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Mysql.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/address.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/objectT.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/table_relation.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +120,14 @@
       <workItem from="1705062911950" duration="113000" />
       <workItem from="1705116429714" duration="1352000" />
       <workItem from="1705209183192" duration="5917000" />
-      <workItem from="1705392422919" duration="3057000" />
+      <workItem from="1705392422919" duration="3094000" />
+      <workItem from="1705565538296" duration="24000" />
+      <workItem from="1712294498069" duration="13000" />
+      <workItem from="1712906347571" duration="894000" />
+      <workItem from="1712907266243" duration="320000" />
+      <workItem from="1713323689394" duration="918000" />
+      <workItem from="1715410628298" duration="139000" />
+      <workItem from="1715414389255" duration="168000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -404,14 +411,21 @@
       <option name="presentableId" value="LOCAL−00047" />
       <updated>1703219740319</updated>
     </task>
-    <task id="LOCAL−00048" summary="cache data overwrite fix">
+    <task id="LOCAL−00049" summary="cache data overwrite fix&#10;update and upsert now separated">
       <option name="closed" value="true" />
-      <created>1705062978258</created>
-      <option name="number" value="LOCAL−00048" />
-      <option name="presentableId" value="LOCAL−00048" />
-      <updated>1705062978258</updated>
+      <created>1705398660173</created>
+      <option name="number" value="LOCAL−00049" />
+      <option name="presentableId" value="LOCAL−00049" />
+      <updated>1705398660173</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL−00050" summary="no need for belongsTo relation">
+      <option name="closed" value="true" />
+      <created>1712907544318</created>
+      <option name="number" value="LOCAL−00050" />
+      <option name="presentableId" value="LOCAL−00050" />
+      <updated>1712907544318</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,8 +443,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="custom updated_at column definition added" />
-    <MESSAGE value="minor fixes" />
     <MESSAGE value="Project.WS changed to Project_WS" />
     <MESSAGE value=".select() added - this resets all previous objects" />
     <MESSAGE value="whereRaw added" />
@@ -454,6 +466,8 @@
     <MESSAGE value="doc updated" />
     <MESSAGE value="docs updated" />
     <MESSAGE value="cache data overwrite fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="cache data overwrite fix" />
+    <MESSAGE value="cache data overwrite fix&#10;update and upsert now separated" />
+    <MESSAGE value="no need for belongsTo relation" />
+    <option name="LAST_COMMIT_MESSAGE" value="no need for belongsTo relation" />
   </component>
 </project>
