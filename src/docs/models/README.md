@@ -10,8 +10,6 @@ class Model extends ProjectRest.model{
     constructor(wso) {
 
         super(wso, 'object', 'object_id');
-        this.belongsTo('address', 'object_address_id', 'address_id');
-        this.belongsTo('address_join', 'object_address_id', 'address_id');
     }
     
     active(){
