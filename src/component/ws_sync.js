@@ -1,7 +1,6 @@
 import * as FileSystem from "expo-file-system";
 import {AppState} from "react-native";
 import WS_stmt from "./ws_stmt";
-import WS_fetchdata from "./ws_fetchdata";
 import WS_config from "./ws_config";
 import NetInfo from "@react-native-community/netinfo";
 import canJSON from "project-can-json";
@@ -11,24 +10,12 @@ class sync extends WS_stmt {
 
     cacheFile = null;
 
-    constructor(table, primaryKey, updatedAt) {
+    constructor(table) {
 
         super();
 
         this.setTable(table);
-        this.setPrimaryKey(primaryKey);
-        this.setUpdatedAt(updatedAt);
         this.cacheFile = WS_config.STORAGE_DIR + '/' + this.ws.channel + '/ws_cache.json';
-        WS_config.sync[table] = {table: table, primaryKey: primaryKey, updatedAt: updatedAt};
-
-        let reSync = () => {
-
-            Object.values(WS_config.sync).forEach((sync_table) => {
-
-                new sync(sync_table.table, sync_table.primaryKey, sync_table.updatedAt)
-                    .sync();
-            });
-        };
 
         (async () => {
 
@@ -87,101 +74,6 @@ class sync extends WS_stmt {
         }
     }
 
-    sync() {
-
-        //console.log('---SYNC---', this.ws.channel + '@' + this.table);
-
-        if (this.updatedAt === undefined)
-            return this;
-
-        this
-            .fileGetContent(this.ws.channel, this.table)
-            .then((modelData) => {
-
-                let updated_at = this.ws.getUpdatedAt(modelData, this.updatedAt, 'ASC');
-                let {column, join, use, where} = this.getStmt();
-                this.resetStmt();
-
-                if (updated_at) {
-
-                    this.ws
-                        .setStmt(column, join, use, where)
-                        .where(this.updatedAt, '>', updated_at)
-                        .order(this.updatedAt, "desc")
-                        //.debug()
-                        .fetch(this.table)
-                        .then((data) => {
-
-                            //console.log('SYNC-1 "' + this.table + '"', Object.values(data.data).length);
-                            this.syncData(data.data);
-                        })
-                        .catch(() => {
-                        });
-                } else {
-
-                    this.ws
-                        .setStmt(column, join, use, where)
-                        .order(this.updatedAt, "desc")
-                        //.debug()
-                        .fetch(this.table)
-                        .then((data) => {
-
-                            //console.log('SYNC-2 "' + this.table + '"', Object.values(data.data).length);
-                            this.syncData(data.data);
-                        })
-                        .catch(() => {
-                        });
-                }
-            });
-    }
-
-    syncData(rows) {
-
-        if (rows.length) {
-
-            this
-                .fileGetContent(this.ws.channel, this.table)
-                .then((modelData) => {
-
-                    let primaryKey = this.primaryKey;
-                    //console.log('---SYNC-TABLE-' + this.table, rows.length);
-
-                    rows.forEach((row) => {
-
-                        if (this.stmtDebug) {
-
-                            console.log('SYNC-TABLE-' + this.table, row);
-                            console.log('SYNC-TABLE-' + this.table, JSON.stringify(row, null, 2));
-                            console.log('SYNC-TABLE-' + this.table, row.trigger + '----' + primaryKey + '-----' + row[primaryKey]);
-                        }
-
-                        if ((row.trigger !== undefined && ['insert', 'update', 'upsert', 'fetch'].indexOf(row.trigger) !== -1) || row.trigger === undefined) {
-
-                            modelData = new WS_fetchdata(this.table, this.primaryKey)
-                                .mergeData(modelData, row);
-                        }
-                        if (row.trigger !== undefined && ['delete'].indexOf(row.trigger) !== -1) {
-
-                            if (row[primaryKey] !== undefined && modelData[row[primaryKey]] !== undefined) {
-
-                                delete modelData[row[primaryKey]];
-                            }
-                        }
-                    });
-
-                    FileSystem.writeAsStringAsync(this.file(this.ws.channel, this.table), JSON.stringify(modelData));
-                });
-        }
-    }
-
-    listen() {
-
-        this.ws.listen(this.table, (e, table) => {
-
-            this.syncData([e]);
-        });
-    }
-
     send(row) {
 
         callback(function (row) {
@@ -189,18 +81,13 @@ class sync extends WS_stmt {
             this.ws
                 //.offline()
                 .setData(row)
-                .setCallback(this.getCallback())
                 .send(row.event, row.model, row.data)
                 //if everything is ok then do nothing
                 .then((response) => {
-
-                    let callback = this.ws.getCallback();
-                    callback(response);
                 })
                 //if something is wrong then store data
                 .catch(async (error) => {
 
-                    let callback = this.ws.getCallback();
                     let tmp = row;
                     let date = new Date();
 
@@ -220,9 +107,14 @@ class sync extends WS_stmt {
                             await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify(cacheData));
                         }
                     }
-                    callback(error);
                 });
         }, this, row);
+    }
+
+    reset() {
+
+        WS_config.cacheData = {};
+        FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify({}));
     }
 
     async cacheSend() {

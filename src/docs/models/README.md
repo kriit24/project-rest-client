@@ -7,6 +7,10 @@ import Wso from "../config";
 
 class Model extends ProjectRest.model{
 
+    fillable = [
+        'id', 'value', 'name'
+    ];
+
     constructor(wso) {
 
         super(wso, 'object', 'object_id');

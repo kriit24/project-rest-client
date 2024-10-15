@@ -48,6 +48,25 @@ object
                 
 ```
 
+WHERE
+
+```
+//normal where statement
+.where('object_id', '=', 1)
+
+//without operator
+.where('object_id', 1)
+
+//where in
+.whereIn('object_id', [1])
+
+//where not in
+.whereNotIn('object_id', [1])
+
+//where raw
+.whereRaw("object_id IN(1)")
+```
+
 INSERT
 
 ```
@@ -84,11 +103,19 @@ object.where({'object_id': 5000}).update({
 UPSERT - insert or update (unique id required)
 
 ```
-object.upsert({
-    object_id: 5000,
+object.upsert(
+//update, insert data
+//on update it will update only this data
+//on insert it will merge data and unique objects
+{
     object_address_id: 5000,
     object_name: 'five thousand'
-});
+},
+//unique id
+{
+    object_id: 5000,
+}
+);
 ```
 
 DELETE

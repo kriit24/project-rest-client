@@ -4,15 +4,14 @@ import WS_stmt from "./ws_stmt";
 import WS_fetchdata from "./ws_fetchdata";
 import WS_config from "./ws_config";
 import foreach from "./foreach";
-
-let onPromises = {};
+import DB from "./ws_sql_lite";
 
 class WS_model extends WS_stmt {
 
-    belongsStmt = {};
     promises = [];
+    onPromises = [];
 
-    constructor(ws, table, primaryKey, updatedAt) {
+    constructor(ws, table) {
 
         super();
 
@@ -24,21 +23,14 @@ class WS_model extends WS_stmt {
 
         this.setWs(ws);
         this.setTable(table);
-        this.setPrimaryKey(primaryKey);
-        this.setUpdatedAt(updatedAt);
 
         if (!this.table) {
 
             throw new Error('Model table name is empty');
             return this;
         }
-        if (!this.primaryKey) {
 
-            throw new Error('Primary key is empty');
-            return this;
-        }
-
-        onPromises[this.table] = onPromises[this.table] === undefined ? false : onPromises[this.table];
+        this.onPromises[this.table] = this.onPromises[this.table] === undefined ? false : this.onPromises[this.table];
 
         (async () => {
 
@@ -54,22 +46,23 @@ class WS_model extends WS_stmt {
                 FileSystem.makeDirectoryAsync(WS_config.STORAGE_DIR + '/' + this.ws.channel, {intermediates: true});
             }
 
-            let fileInfo = await FileSystem.getInfoAsync(this.file(this.ws.channel, this.table));
-            if (!fileInfo.exists) {
-
-                FileSystem.writeAsStringAsync(this.file(this.ws.channel, this.table), JSON.stringify({}));
-            }
-
-            let model_sync = new sync(this.table, primaryKey, updatedAt);
-            model_sync.listen();
-            model_sync.sync();
+            new sync(this.table);
         })();
     }
 
-    belongsTo(model, foreignKey, primaryKey) {
+    SQL(appends) {
 
-        this.belongsStmt[model] = [model, foreignKey, primaryKey];
-        return this;
+        let db = new DB(this.table, this.fillable);
+
+        if (appends !== undefined && appends.length) {
+
+            foreach(appends, (k, name) => {
+
+                db[name] = this[name];
+            });
+        }
+
+        return db;
     }
 
     with(model) {
@@ -78,136 +71,73 @@ class WS_model extends WS_stmt {
         return this;
     }
 
-    clear() {
-
-        this.addPromise(async (resolve, reject) => {
-
-            await FileSystem.writeAsStringAsync(this.file(this.ws.channel, this.table), JSON.stringify({}));
-            resolve(true);
-        }, {});
-        this.runPromises();
-    }
-
     insert(data) {
 
         let uniqueId = this.unique_id(this.table);
 
-        this.addPromise((resolve, reject, data) => {
+        this.#addPromise((resolve, reject, data) => {
 
-            let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
-            let primaryKey = this.primaryKey;
+            (new sync(this.table))
+                .send({'event': 'post', 'model': this.table, 'data': data});
 
-            //insert
-            if (data[primaryKey] === undefined) {
-
-                model_sync
-                    .setCallback((response) => {
-
-                        model_sync.sync();
-                    })
-                    .send({'event': 'post', 'model': this.table, 'data': data});
-            }
             resolve(true);
         }, Object.assign(Object.assign({'data_unique_id': null}, data), {'data_unique_id': uniqueId}));
-        this.runPromises();
+        this.#runPromises();
 
         return uniqueId;
     }
 
-    //.update({set: 1}, primary_id);
-    //.update({set: 1}, {'key': 'value'});
     //.where().update({set: 1});
     //.whereRaw().update({set: 1});
 
-    update(data, primary_id) {
+    update(data) {
 
         let d = Object.assign({}, data);
-        let w = [];
-        if (primary_id === undefined) {
-            w = this.stmtWhere;
-        } else if (typeof primary_id === 'object' && !Array.isArray(primary_id)) {
+        let w = this.stmtWhere;
 
-            foreach(primary_id, function (k, v) {
+        this.#addPromise((resolve, reject, data) => {
 
-                w.push([k, '=', v]);
-            })
-        } else {
-            w.push([this.primaryKey, '=', +primary_id]);
-        }
+            let model_sync = new sync(this.table);
 
-        this.addPromise((resolve, reject, data) => {
+            if (data.set !== undefined && data.set !== null && data.where !== undefined && data.where !== null) {
 
-            let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
-
-            if (data.where !== undefined && data.where !== null) {
-
-                model_sync
-                    .setCallback((response) => {
-
-                        model_sync.sync();
-                    })
-                    .send({'event': 'put', 'model': this.table, 'data': data});
+                model_sync.send({'event': 'put', 'model': this.table, 'data': data});
             }
 
             resolve(true);
         }, {'set': d, 'where': w});
-        this.runPromises();
+        this.#runPromises();
     }
 
-    upsert(data) {
+    upsert(data, uniqueColumnsWhere) {
 
-        this.addPromise((resolve, reject, data) => {
+        let d = Object.assign({}, data);
+        let w = uniqueColumnsWhere !== undefined ? uniqueColumnsWhere : null;
 
-            let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
-            let primaryKey = this.primaryKey;
+        this.#addPromise((resolve, reject, data) => {
 
-            if (data[primaryKey] !== undefined) {
-
-                model_sync
-                    .setCallback((response) => {
-
-                        model_sync.sync();
-                    })
-                    .send({'event': 'push', 'model': this.table, 'data': data});
-            }
+            (new sync(this.table))
+                .send({'event': 'push', 'model': this.table, 'data': data});
 
             resolve(true);
-        }, Object.assign({}, data));
-        this.runPromises();
+        }, {'set': d, 'where': w});
+        this.#runPromises();
     }
 
-    delete(primary_id) {
+    //.where().delete();
+    //.whereRaw().delete();
+    delete() {
 
-        this.addPromise((resolve, reject, data) => {
+        let w = this.stmtWhere;
 
-            this
-                .fileGetContent(this.ws.channel, this.table)
-                .then(async (modelData) => {
+        this.#addPromise((resolve, reject, data) => {
 
-                    if (modelData[data.primary_id] !== undefined) {
-
-                        delete modelData[data.primary_id];
-
-                        //console.log('DELETE', deleteData);
-                        await FileSystem.writeAsStringAsync(this.file(this.ws.channel, this.table), JSON.stringify(modelData));
-                    }
-
-                    let primaryKey = this.primaryKey;
-                    let deleteData = {};
-                    deleteData[primaryKey] = data.primary_id;
-
-                    let model_sync = new sync(this.table, this.primaryKey, this.updatedAt);
-                    model_sync
-                        .setCallback((response) => {
-
-                            model_sync.sync();
-                        })
-                        .send({'event': 'delete', 'model': this.table, 'data': deleteData});
+            let model_sync = new sync(this.table);
+            model_sync.send({'event': 'delete', 'model': this.table, 'data': data});
 
                     resolve(true);
-                });
-        }, Object.assign({}, {primary_id: primary_id}));
-        this.runPromises();
+        }, {'where': w});
+        this.#runPromises();
     }
 
     fetchAll(callback) {
@@ -215,14 +145,13 @@ class WS_model extends WS_stmt {
         let {column, join, use, where, group, order, limit} = this.getStmt();
         this.resetStmt();
 
-        this.addPromise((resolve, reject, data) => {
+        this.#addPromise((resolve, reject, data) => {
 
             let {column, join, use, where, group, order, limit} = data;
             this.setStmt(column, join, use, where, group, order, limit);
 
-            new WS_fetchdata(this.table, this.primaryKey)
+            new WS_fetchdata(this.table)
                 .setStmt(column, join, use, where, group, order, limit)
-                .setBelongsStmt(this.belongsStmt)
                 .setUseCallbackStmt(this.stmtUseCallback)
                 .fetch((rows) => {
 
@@ -230,7 +159,7 @@ class WS_model extends WS_stmt {
                     resolve(true);
                 });
         }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, group: group, order: order}));
-        this.runPromises();
+        this.#runPromises();
     }
 
     fetch(callback) {
@@ -238,14 +167,13 @@ class WS_model extends WS_stmt {
         let {column, join, use, where, group, order, limit} = this.getStmt();
         this.resetStmt();
 
-        this.addPromise((resolve, reject, data) => {
+        this.#addPromise((resolve, reject, data) => {
 
             let {column, join, use, where, group, order, limit} = data;
             this.setStmt(column, join, use, where, group, order, limit);
 
-            new WS_fetchdata(this.table, this.primaryKey)
+            new WS_fetchdata(this.table)
                 .setStmt(column, join, use, where, group, order, limit)
-                .setBelongsStmt(this.belongsStmt)
                 .setUseCallbackStmt(this.stmtUseCallback)
                 .fetch((rows) => {
 
@@ -253,10 +181,42 @@ class WS_model extends WS_stmt {
                     resolve(true);
                 });
         }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, group: group, order: order}));
-        this.runPromises();
+        this.#runPromises();
     }
 
-    addPromise(callback, args) {
+    live(callback, all = false) {
+
+        let {column, join, use, where, group, order, limit} = this.getStmt();
+        this.resetStmt();
+
+        this.#addPromise((resolve, reject, data) => {
+
+            let {column, join, use, where, group, order, limit, all} = data;
+            this.setStmt(column, join, use, where, group, order, limit);
+
+            new WS_fetchdata(this.table)
+                .setStmt(column, join, use, where, group, order, limit)
+                .setUseCallbackStmt(this.stmtUseCallback)
+                .live((rows) => {
+
+                    callback(rows.length ? rows : {});
+                    resolve(true);
+                }, all);
+        }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, group: group, order: order, all: all}));
+        this.#runPromises();
+    }
+
+    liveAll(callback) {
+
+        this.live(callback, true);
+    }
+
+    reset(){
+
+        (new sync(this.table)).reset();
+    }
+
+    #addPromise(callback, args) {
 
         this.promises.push(
             function (callback, args) {
@@ -268,19 +228,19 @@ class WS_model extends WS_stmt {
         );
     }
 
-    runPromises() {
+    #runPromises() {
 
-        if (this.promises.length && !onPromises[this.table]) {
+        if (this.promises.length && !this.onPromises[this.table]) {
 
-            onPromises[this.table] = true;
+            this.onPromises[this.table] = true;
             let promise = this.promises.shift();
             promise().then((res) => {
 
                 setTimeout(() => {
 
-                    onPromises[this.table] = false;
+                    this.onPromises[this.table] = false;
                     if (this.promises.length)
-                        this.runPromises();
+                        this.#runPromises();
                 }, 10);
                 return res;
             });

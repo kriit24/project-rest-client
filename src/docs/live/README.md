@@ -1,30 +1,23 @@
 ### live
 
 ```
-//watch one object changes
+//watch object changes
 object
 .select()//this resets all previous objects
 .where('object_id', 5000)
 .live((row) => {
 
     console.log('OBJECT-5000');
-    console.log(JSON.stringify(row, null, 2));
+    console.log(row);
 });
 
 //watch all object changes
-let object_rows = [];
 object
 .select()//this resets all previous objects
-.live((rows) => {
+.liveAll((rows) => {
 
-    console.log('OBJECT-5000');
-    console.log(JSON.stringify(rows, null, 2));
-    
-    //watch only updates
-    object_rows = message.merge(object_rows, rows, true);
-    console.log('OBJECT-UPDATES');
-    console.log(JSON.stringify(object_rows, null, 2));
-});              
+    console.log(rows);
+});            
 ```
 
 #### live requests uses SELECT QUERYING  

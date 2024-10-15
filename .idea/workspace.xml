@@ -4,10 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="no need for belongsTo relation">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="sqlite based data caching and syncing added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/app/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/app/model/address.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/model/address.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/app/model/object.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/model/object.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__test__/index.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/index.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_fetchdata.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_fetchdata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/config/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/config/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/live/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/live/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/models/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/models/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/offline/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/query/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/query/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/Insert_relational_data.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/Insert_relational_data.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/AddressBeforeInsert.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/ObjectAfterInsert.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/TableRelation.php" beforeDir="false" />
@@ -15,6 +32,7 @@
       <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/address.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/objectT.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/table_relation.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,36 +49,52 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2WKLjC4CA0IjRw4hQm8lNCFVMj0" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/component&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/docs/migrations",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2023.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "two.files.diff.last.used.folder": "C:/Users/kuno/Documents/_WORK/PHPSTORM/react_native/QRLogistics/node_modules/project-rest-client/src/component",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\migrations" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\component" />
+      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\sql" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest_api\laravel\app" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\app" />
-      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\app\Models" />
-      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\routes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\migrations\migrations" />
+      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\migrations" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest_api\laravel\app\Models" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PS-242.23339.16" />
+        <option value="bundled-php-predefined-a98d8de5180a-90914f2295cb-com.jetbrains.php.sharedIndexes-PS-242.23339.16" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -127,7 +161,27 @@
       <workItem from="1712907266243" duration="320000" />
       <workItem from="1713323689394" duration="918000" />
       <workItem from="1715410628298" duration="139000" />
-      <workItem from="1715414389255" duration="168000" />
+      <workItem from="1715414389255" duration="234000" />
+      <workItem from="1716802656294" duration="847000" />
+      <workItem from="1717407499584" duration="263000" />
+      <workItem from="1717478804104" duration="1706000" />
+      <workItem from="1717488104044" duration="22162000" />
+      <workItem from="1718095848603" duration="1848000" />
+      <workItem from="1718193160526" duration="552000" />
+      <workItem from="1718337332120" duration="37000" />
+      <workItem from="1718337382201" duration="1824000" />
+      <workItem from="1718678949973" duration="616000" />
+      <workItem from="1726977236229" duration="3000" />
+      <workItem from="1726977719679" duration="13000" />
+      <workItem from="1726978766795" duration="7000" />
+      <workItem from="1728453332068" duration="1237000" />
+      <workItem from="1728619613850" duration="743000" />
+      <workItem from="1728622527384" duration="8000" />
+      <workItem from="1728623706833" duration="46000" />
+      <workItem from="1728708143556" duration="10000" />
+      <workItem from="1728708822977" duration="272000" />
+      <workItem from="1728710510289" duration="632000" />
+      <workItem from="1728795921494" duration="12044000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -411,21 +465,21 @@
       <option name="presentableId" value="LOCAL−00047" />
       <updated>1703219740319</updated>
     </task>
-    <task id="LOCAL−00049" summary="cache data overwrite fix&#10;update and upsert now separated">
+    <task id="LOCAL−00051" summary="SDK51">
       <option name="closed" value="true" />
-      <created>1705398660173</created>
-      <option name="number" value="LOCAL−00049" />
-      <option name="presentableId" value="LOCAL−00049" />
-      <updated>1705398660173</updated>
+      <created>1715414611315</created>
+      <option name="number" value="LOCAL−00051" />
+      <option name="presentableId" value="LOCAL−00051" />
+      <updated>1715414611316</updated>
     </task>
-    <task id="LOCAL−00050" summary="no need for belongsTo relation">
+    <task id="LOCAL−00052" summary="readme updated">
       <option name="closed" value="true" />
-      <created>1712907544318</created>
-      <option name="number" value="LOCAL−00050" />
-      <option name="presentableId" value="LOCAL−00050" />
-      <updated>1712907544318</updated>
+      <created>1717494589915</created>
+      <option name="number" value="LOCAL−00052" />
+      <option name="presentableId" value="LOCAL−00052" />
+      <updated>1717494589915</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,8 +497,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Project.WS changed to Project_WS" />
-    <MESSAGE value=".select() added - this resets all previous objects" />
     <MESSAGE value="whereRaw added" />
     <MESSAGE value="added fetch error console warn when request status is not 200 and debug mode is on" />
     <MESSAGE value="send and fetch console log update" />
@@ -468,6 +520,8 @@
     <MESSAGE value="cache data overwrite fix" />
     <MESSAGE value="cache data overwrite fix&#10;update and upsert now separated" />
     <MESSAGE value="no need for belongsTo relation" />
-    <option name="LAST_COMMIT_MESSAGE" value="no need for belongsTo relation" />
+    <MESSAGE value="SDK51" />
+    <MESSAGE value="readme updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme updated" />
   </component>
 </project>

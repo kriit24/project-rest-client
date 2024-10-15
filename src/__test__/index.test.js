@@ -1,13 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import renderer from 'react-test-renderer';
 
 import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock.js';
+import object from "./app/model/object";
 
 jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo);
-
-import address from "./app/model/address";
-import object from "./app/model/object";
 
 
 export default class MainApp extends React.Component {
@@ -21,7 +19,7 @@ export default class MainApp extends React.Component {
         /*
         object.save({
             object_address_id: 5000,
-            object_name: 'five thousant'
+            object_name: 'five thousand'
         }, 5000);
 
         object.delete(5000);

@@ -3,10 +3,13 @@ import Wso from "../config";
 
 class Model extends ProjectRest.model{
 
+    fillable = [
+        'address_id', 'address_address'
+    ];
+
     constructor(wso) {
 
-        super(wso, 'address', 'address_id', 'address_updated_at');
-        //this.belongsTo('address');
+        super(wso, 'address');
     }
 }
 

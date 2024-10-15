@@ -1,15 +1,11 @@
 import WS_config from "./ws_config";
-import * as FileSystem from "expo-file-system";
 import Ws_crypto from "./ws_crypto";
-import canJSON from "project-can-json";
 import Base64 from "./base64";
 import unique_id from "./unique_id";
 
 class WS_stmt {
 
     table = undefined;
-    primaryKey = undefined;
-    updatedAt = undefined;
     stmtColumn = [];
     stmtJoin = [];
     stmtUse = [];
@@ -20,7 +16,7 @@ class WS_stmt {
     stmtDebug = false;
     stmtOffline = false;
     stmtData = null;
-    stmtCallback = null;
+    stmtCallback = undefined;
 
     setConf(conf) {
 
@@ -56,18 +52,6 @@ class WS_stmt {
         return this;
     }
 
-    setPrimaryKey(primaryKey) {
-
-        this.primaryKey = primaryKey;
-        return this;
-    }
-
-    setUpdatedAt(updatedAt) {
-
-        this.updatedAt = updatedAt;
-        return this;
-    }
-
     setCallback(callback) {
 
         this.stmtCallback = callback;
@@ -85,6 +69,19 @@ class WS_stmt {
         return Base64.btoa(prefix + Math.floor(new Date().getTime() / 1000) + unique_id());
     }
 
+    prepareJoin(data){
+
+        let ret = {};
+        if (data.length) {
+
+            data.forEach((v, k) => {
+
+                ret[v] = [v, null, null];
+            });
+        }
+        return ret;
+    }
+
     debug() {
 
         this.stmtDebug = true;
@@ -95,43 +92,6 @@ class WS_stmt {
 
         this.stmtOffline = true;
         return this;
-    }
-
-    file(channel, table) {
-
-        if (channel === undefined) {
-
-            console.error('CHANNEL IS MISSING');
-        }
-
-        let dir = WS_config.STORAGE_DIR + '/' + channel;
-        let file = table + '_model.json';
-        return dir + '/' + file;
-    }
-
-    fileGetContent(channel, table) {
-
-        return new Promise(async (resolve, reject) => {
-
-            let file = this.file(channel, table);
-            let dirInfo = await FileSystem.getInfoAsync(file);
-            if (dirInfo.exists) {
-
-                canJSON(
-                    await FileSystem.readAsStringAsync(file),
-                    (modelData) => {
-
-                        resolve(modelData);
-                    },
-                    () => {
-
-                        resolve({});
-                    });
-            } else {
-
-                resolve({});
-            }
-        });
     }
 
     setData(data) {
@@ -222,12 +182,6 @@ class WS_stmt {
         this.stmtOffline = false;
     }
 
-    setBelongsStmt(belongs) {
-
-        this.belongsStmt = belongs;
-        return this;
-    }
-
     setUseCallbackStmt(stmtUseCallback) {
 
         this.stmtUseCallback = stmtUseCallback;
@@ -287,41 +241,22 @@ class WS_stmt {
         return this;
     }
 
-    whereRaw(column) {
+    whereIn(column, value){
 
-        this.stmtWhere.push([column, "raw", null]);
+        this.where(column, 'in', value);
         return this;
     }
 
-    whereFilter(haystack, where) {
+    whereNotIn(column, value){
 
-        return Object.values(haystack).filter((row) => {
+        this.where(column, 'not_in', value);
+        return this;
+    }
 
-            let exists = 0;
-            for (stmtWhere of where) {
+    whereRaw(value) {
 
-                let column = stmtWhere[0];
-                let operator = stmtWhere.length === 3 ? stmtWhere[1] : '=';
-                let value = stmtWhere.length === 3 ? stmtWhere[2] : stmtWhere[1];
-                if (row[column] !== undefined) {
-
-                    if (operator === 'in_array') {
-
-                        if (value.indexOf(row[column]) !== -1)
-                            exists += 1;
-                    } else if (operator === '=' && typeof (row[column]) == 'string') {
-
-                        if (row[column].toLowerCase() === value.toLowerCase())
-                            exists += 1;
-                    } else {
-
-                        if (row[column] === value)
-                            exists += 1;
-                    }
-                }
-            }
-            return exists === Object.keys(where).length ? row : null;
-        }, where);
+        this.stmtWhere.push([value, "raw", null]);
+        return this;
     }
 
     group(group) {
@@ -340,40 +275,6 @@ class WS_stmt {
 
         this.stmtLimit = [limit, offset];
         return this;
-    }
-
-    limitData(rows, limit, offset) {
-
-        if (limit === undefined && offset === undefined) {
-
-            return rows;
-        }
-        if (offset === undefined) {
-
-            offset = 0;
-        }
-
-        let i = 0;
-        let ret = [];
-        rows.every((v, k) => {
-
-            if (i >= offset) {
-
-                if (i < limit) {
-
-                    ret.push(v);
-                    i++;
-                    return true;
-                } else {
-
-                    return false;
-                }
-            }
-
-            i++;
-            return true;
-        });
-        return ret;
     }
 }
 
