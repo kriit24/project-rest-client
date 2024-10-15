@@ -66,11 +66,9 @@ class DB {
 
                 error({
                     'message': 'SQLITE QUERY ERROR',
-                    'sql': sql,
+                    'sql': query,
                     'error': e,
                 });
-            } finally {
-                await statement.finalizeAsync();
             }
 
             resolve(value);

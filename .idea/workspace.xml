@@ -6,33 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="sqlite based data caching and syncing added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/app/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/app/model/address.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/model/address.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/app/model/object.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/app/model/object.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/index.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/index.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_connect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_fetchdata.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_fetchdata.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sync.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/config/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/config/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/live/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/live/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/models/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/models/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/offline/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/query/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/query/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/Insert_relational_data.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/rest_api/Insert_relational_data.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/AddressBeforeInsert.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/ObjectAfterInsert.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Events/TableRelation.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/Mysql.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/address.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/objectT.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docs/rest_api/laravel/app/Models/table_relation.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_sql_lite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sql_lite.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,23 +32,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/docs/migrations",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2023.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "two.files.diff.last.used.folder": "C:/Users/kuno/Documents/_WORK/PHPSTORM/react_native/QRLogistics/node_modules/project-rest-client/src/component",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/docs/migrations&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PhpStorm 2023.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;two.files.diff.last.used.folder&quot;: &quot;C:/Users/kuno/Documents/_WORK/PHPSTORM/react_native/QRLogistics/node_modules/project-rest-client/src/component&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\migrations" />
@@ -181,7 +156,8 @@
       <workItem from="1728708143556" duration="10000" />
       <workItem from="1728708822977" duration="272000" />
       <workItem from="1728710510289" duration="632000" />
-      <workItem from="1728795921494" duration="12044000" />
+      <workItem from="1728795921494" duration="13049000" />
+      <workItem from="1728969726527" duration="24000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -465,13 +441,6 @@
       <option name="presentableId" value="LOCAL−00047" />
       <updated>1703219740319</updated>
     </task>
-    <task id="LOCAL−00051" summary="SDK51">
-      <option name="closed" value="true" />
-      <created>1715414611315</created>
-      <option name="number" value="LOCAL−00051" />
-      <option name="presentableId" value="LOCAL−00051" />
-      <updated>1715414611316</updated>
-    </task>
     <task id="LOCAL−00052" summary="readme updated">
       <option name="closed" value="true" />
       <created>1717494589915</created>
@@ -479,7 +448,14 @@
       <option name="presentableId" value="LOCAL−00052" />
       <updated>1717494589915</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL−00053" summary="sqlite based data caching and syncing added">
+      <option name="closed" value="true" />
+      <created>1728964191191</created>
+      <option name="number" value="LOCAL−00053" />
+      <option name="presentableId" value="LOCAL−00053" />
+      <updated>1728964191191</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,7 +473,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="whereRaw added" />
     <MESSAGE value="added fetch error console warn when request status is not 200 and debug mode is on" />
     <MESSAGE value="send and fetch console log update" />
     <MESSAGE value="use statement added" />
@@ -522,6 +497,7 @@
     <MESSAGE value="no need for belongsTo relation" />
     <MESSAGE value="SDK51" />
     <MESSAGE value="readme updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="readme updated" />
+    <MESSAGE value="sqlite based data caching and syncing added" />
+    <option name="LAST_COMMIT_MESSAGE" value="sqlite based data caching and syncing added" />
   </component>
 </project>
