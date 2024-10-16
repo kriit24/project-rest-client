@@ -253,9 +253,9 @@ class WS_stmt {
         return this;
     }
 
-    whereRaw(value) {
+    whereRaw(value, params = null) {
 
-        this.stmtWhere.push([value, "raw", null]);
+        this.stmtWhere.push([value, "raw", params]);
         return this;
     }
 

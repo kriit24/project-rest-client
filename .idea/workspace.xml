@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_sql_lite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sql_lite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +158,8 @@
       <workItem from="1728708822977" duration="272000" />
       <workItem from="1728710510289" duration="632000" />
       <workItem from="1728795921494" duration="13049000" />
-      <workItem from="1728969726527" duration="24000" />
+      <workItem from="1728969726527" duration="137000" />
+      <workItem from="1729053896554" duration="45000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -441,13 +443,6 @@
       <option name="presentableId" value="LOCAL−00047" />
       <updated>1703219740319</updated>
     </task>
-    <task id="LOCAL−00052" summary="readme updated">
-      <option name="closed" value="true" />
-      <created>1717494589915</created>
-      <option name="number" value="LOCAL−00052" />
-      <option name="presentableId" value="LOCAL−00052" />
-      <updated>1717494589915</updated>
-    </task>
     <task id="LOCAL−00053" summary="sqlite based data caching and syncing added">
       <option name="closed" value="true" />
       <created>1728964191191</created>
@@ -455,7 +450,14 @@
       <option name="presentableId" value="LOCAL−00053" />
       <updated>1728964191191</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL−00054" summary="sqlite based data caching and syncing added">
+      <option name="closed" value="true" />
+      <created>1728969775241</created>
+      <option name="number" value="LOCAL−00054" />
+      <option name="presentableId" value="LOCAL−00054" />
+      <updated>1728969775241</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

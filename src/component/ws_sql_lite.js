@@ -143,7 +143,7 @@ class DB {
         return this;
     }
 
-    whereRaw(where) {
+    whereRaw(where, params = null) {
 
         if (this.params['WHERE'] === undefined)
             this.params['WHERE'] = [`${where}`];
@@ -154,6 +154,11 @@ class DB {
             this.#sync['WHERE_RAW'] = [where];
         else
             this.#sync['WHERE_RAW'].push(where);
+
+        if( params ){
+
+            this.param_values.push(params);
+        }
 
         return this;
     }
