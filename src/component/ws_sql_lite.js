@@ -29,19 +29,19 @@ class DB {
         }
     }
 
-    async init(name, callback) {
+    init(name, callback) {
 
         this.#db = name;
-        WS_config.db = await SQLite.openDatabaseAsync(name);
+        WS_config.db = SQLite.openDatabaseSync(name);
         callback();
     }
 
-    async reset(){
+    reset() {
 
-        await WS_config.db.closeAsync();
-        await SQLite.deleteDatabaseAsync(this.#db);
-        WS_config.db = await SQLite.openDatabaseAsync(this.#db);
-        return new Promise(async (resolve, reject) => resolve('true'));
+        WS_config.db.closeSync();
+        SQLite.deleteDatabaseSync(this.#db);
+        WS_config.db = SQLite.openDatabaseSync(this.#db);
+        return new Promise((resolve, reject) => resolve('true'));
     }
 
     raw(value) {
@@ -51,26 +51,10 @@ class DB {
 
     query(query, params) {
 
-        return new Promise(async (resolve, reject) => {
+        return new Promise((resolve, reject) => {
 
             let value = null;
-            let statement, result = null;
-
-            try {
-
-                statement = await WS_config.db.prepareAsync(query);
-                result = await statement.executeAsync(params);
-                value = await result.getAllAsync();
-
-            } catch (e) {
-
-                error({
-                    'message': 'SQLITE QUERY ERROR',
-                    'sql': query,
-                    'error': e,
-                });
-            }
-
+            this.exec(query, params, (result) => value = result.getAllSync());
             resolve(value);
         });
     }
@@ -110,7 +94,7 @@ class DB {
 
     where(column, operator, value) {
 
-        if (typeof column == 'object' && !Array.isArray(column) && operator == undefined && value == undefined) {
+        if (typeof column == 'object' && !Array.isArray(column) && operator === undefined && value === undefined) {
 
             let columns = Object.keys(column);
             columns.forEach((col) => {
@@ -155,7 +139,7 @@ class DB {
         else
             this.#sync['WHERE_RAW'].push(where);
 
-        if( params ){
+        if (params) {
 
             this.param_values.push(params);
         }
@@ -189,50 +173,43 @@ class DB {
 
     fetchAll(callback) {
 
-        (async () => {
-
-            let value = [];
-            this.exec(this.param_values, (result) => value = result.getAllSync());
-            callback(value);
-        })();
+        let value = [];
+        let query = this.build();
+        this.exec(query, this.param_values, (result) => value = result.getAllSync());
+        callback(value);
     }
 
     fetch(callback) {
 
-        (async () => {
+        if (this.params['LIMIT'] === undefined)
+            this.limit(1);
 
-            if (this.params['LIMIT'] === undefined)
-                this.limit(1);
-
-            let value = [];
-            this.exec(this.param_values, (result) => value = result.getFirstSync());
-            callback(value);
-        })();
+        let value = {};
+        let query = this.build();
+        this.exec(query, this.param_values, (result) => value = result.getFirstSync());
+        callback(value);
     }
 
     fetchEach(callback) {
 
-        (async () => {
+        let query = this.build();
+        let statement = null;
 
-            let sql = this.build();
-            let statement = null;
+        try {
 
-            try {
+            statement = WS_config.db.getEachSync(query, this.param_values);
+            for (let row of statement) {
 
-                statement = WS_config.db.getEachAsync(sql, this.param_values);
-                for await (let row of statement) {
-
-                    callback(row);
-                }
-            } catch (e) {
-
-                error({
-                    'message': 'SQLITE ERROR',
-                    'sql': sql,
-                    'error': e,
-                });
+                callback(row);
             }
-        })();
+        } catch (e) {
+
+            error({
+                'message': 'SQLITE ERROR',
+                'query': query,
+                'error': e,
+            });
+        }
     }
 
     insert(data) {
@@ -246,12 +223,12 @@ class DB {
             "` (" + this.#fillable.map((col) => {
 
                 return data[col] !== undefined ? col : undefined;
-            }).filter((val) => val != undefined) + ") " +
+            }).filter((val) => val !== undefined) + ") " +
             "VALUES " +
             "(" + this.#fillable.map((col) => {
 
                 return data[col] !== undefined ? `$insert_${col}` : undefined;
-            }).filter((val) => val != undefined) + ")"
+            }).filter((val) => val !== undefined) + ")"
         );
 
         this.#fillable.map((col) => {
@@ -264,7 +241,8 @@ class DB {
 
             this.debug();
         }
-        this.#result = this.exec(this.param_values);
+        let query = this.build();
+        this.#result = this.exec(query, this.param_values);
 
         return this;
     }
@@ -284,7 +262,7 @@ class DB {
         this.params['SET'] = this.#fillable.map((col) => {
 
             return data[col] !== undefined ? `${col} = $set_${col}` : undefined;
-        }).filter((val) => val != undefined);
+        }).filter((val) => val !== undefined);
 
         this.#fillable.forEach((col) => {
 
@@ -297,7 +275,8 @@ class DB {
             this.debug();
         }
 
-        this.#result = this.exec(this.param_values);
+        let query = this.build();
+        this.#result = this.exec(query, this.param_values);
 
         return this;
     }
@@ -306,46 +285,57 @@ class DB {
 
         this.#action = 'upsert';
         this.#sync['VALUES'] = data;
+        let value = {};
+
+        //FETCH DATA BY uniqueColumnsWhere
+        if (uniqueColumnsWhere !== undefined && uniqueColumnsWhere && Object.keys(uniqueColumnsWhere).length)
+            this.select().where(uniqueColumnsWhere).limit(1).fetch((row) => value = row);
+        value = value == null || value === undefined ? {} : value;
+
         //INSERT OR IGNORE
-        let insert_data = {...data, ...(uniqueColumnsWhere !== undefined ? uniqueColumnsWhere : {})};
-        this.params = {};
-        this.param_values = {};
-        this.params['INSERT'] = this.raw(
-            "INSERT OR IGNORE INTO `" + this.#table +
-            "` (" + this.#fillable.map((col) => {
+        if (Object.keys(value).length === 0) {
 
-                return insert_data[col] !== undefined ? col : undefined;
-            }).filter((val) => val != undefined) + ") " +
-            "VALUES " +
-            "(" + this.#fillable.map((col) => {
+            let insert_data = {...data, ...(uniqueColumnsWhere !== undefined ? uniqueColumnsWhere : {})};
+            this.params = {};
+            this.param_values = {};
+            this.params['INSERT'] = this.raw(
+                "INSERT OR IGNORE INTO `" + this.#table +
+                "` (" + this.#fillable.map((col) => {
 
-                return insert_data[col] !== undefined ? `$insert_${col}` : undefined;
-            }).filter((val) => val != undefined) + ")" +
-            ";"
-        );
+                    return insert_data[col] !== undefined ? col : undefined;
+                }).filter((val) => val !== undefined) + ") " +
+                "VALUES " +
+                "(" + this.#fillable.map((col) => {
 
-        this.#fillable.map((col) => {
+                    return insert_data[col] !== undefined ? `$insert_${col}` : undefined;
+                }).filter((val) => val !== undefined) + ")" +
+                ";"
+            );
 
-            if (insert_data[col] !== undefined)
-                this.param_values[`$insert_${col}`] = insert_data[col];
-        });
+            this.#fillable.map((col) => {
 
-        if (this.show_debug) {
+                if (insert_data[col] !== undefined)
+                    this.param_values[`$insert_${col}`] = insert_data[col];
+            });
 
-            this.debug();
-        }
+            if (this.show_debug) {
 
-        let result = this.exec(this.param_values);
+                this.debug();
+            }
 
-        if (result.changes !== undefined && result.changes) {
+            let query = this.build();
+            let result = this.exec(query, this.param_values);
 
-            //register where for sync
-            this.where(uniqueColumnsWhere);
-            delete this.params['WHERE'];
+            if (result.changes !== undefined && result.changes) {
 
-            this.#result = result;
+                //register where for sync
+                this.where(uniqueColumnsWhere);
+                delete this.params['WHERE'];
 
-            return this;
+                this.#result = result;
+
+                return this;
+            }
         }
 
         //UPDATE
@@ -355,7 +345,7 @@ class DB {
         this.params['SET'] = this.#fillable.map((col) => {
 
             return data[col] !== undefined ? `${col} = $set_${col}` : undefined;
-        }).filter((val) => val != undefined);
+        }).filter((val) => val !== undefined);
         this.where(uniqueColumnsWhere);
 
         this.#fillable.map((col) => {
@@ -369,7 +359,8 @@ class DB {
             this.debug();
         }
 
-        this.#result = this.exec(this.param_values);
+        let query_2 = this.build();
+        this.#result = this.exec(query_2, this.param_values);
 
         return this;
     }
@@ -390,7 +381,8 @@ class DB {
             this.debug();
         }
 
-        this.#result = this.exec(this.param_values);
+        let query = this.build();
+        this.#result = this.exec(query, this.param_values);
 
         return this;
     }
@@ -418,19 +410,19 @@ class DB {
                 this.#sync['WHERE_RAW'].map((where) => model.whereRaw(where[0]));
             }
 
-            if (action == 'insert') {
+            if (action === 'insert') {
 
                 model.insert(this.#sync['VALUES']);
             }
-            if (action == 'update') {
+            if (action === 'update') {
 
                 model.update(this.#sync['SET']);
             }
-            if (action == 'upsert') {
+            if (action === 'upsert') {
 
                 model.upsert(this.#sync['VALUES'], this.#sync['WHERE']);
             }
-            if (action == 'delete') {
+            if (action === 'delete') {
 
                 model.delete();
             }
@@ -450,9 +442,9 @@ class DB {
 
         if (Object.values(this.params).length) {
 
-            let sql = this.build();
+            let query = this.build();
             console.log('SQL DEBUG');
-            console.log(pre(sql));
+            console.log(pre(query));
             console.log(pre(this.param_values));
             console.log('/SQL DEBUG');
         }
@@ -462,60 +454,60 @@ class DB {
 
     build() {
 
-        let sql = [];
+        let query = [];
 
-        this.implode(sql, 'SELECT');
-        this.implode(sql, 'INSERT');
-        this.implode(sql, 'UPDATE');
-        this.implode(sql, 'DELETE');
-        this.implode(sql, 'SET', ',');
-        this.implode(sql, 'FROM');
-        this.implode(sql, 'JOIN');
-        this.implode(sql, 'WHERE', ' AND ');
-        this.implode(sql, 'ORDER BY', ',');
-        this.implode(sql, 'GROUP BY', ',');
-        this.implode(sql, 'LIMIT');
+        this.implode(query, 'SELECT');
+        this.implode(query, 'INSERT');
+        this.implode(query, 'UPDATE');
+        this.implode(query, 'DELETE');
+        this.implode(query, 'SET', ',');
+        this.implode(query, 'FROM');
+        this.implode(query, 'JOIN');
+        this.implode(query, 'WHERE', ' AND ');
+        this.implode(query, 'ORDER BY', ',');
+        this.implode(query, 'GROUP BY', ',');
+        this.implode(query, 'LIMIT');
 
-        return sql.join(' ').trim(' ');
+        return query.join(' ').trim(' ');
     }
 
-    exec(values, callback){
+    exec(query, values, callback) {
 
-        let sql = this.build();
         let statement, result = null;
 
         try {
 
-            statement = WS_config.db.prepareSync(sql);
+            statement = WS_config.db.prepareSync(query);
             result = statement.executeSync(values);
-            if( callback !== undefined ) callback(result);
+            if (callback !== undefined) callback(result);
         } catch (e) {
 
             error({
                 'message': 'SQLITE ERROR',
-                'sql': sql,
+                'query': query,
                 'error': e,
             });
         } finally {
+
             statement.finalizeSync();
         }
 
         return result;
     }
 
-    implode(sql, name, sub_glue = '') {
+    implode(query, name, sub_glue = '') {
 
         if (this.params[name] !== undefined) {
 
             let value = this.params[name];
             if (typeof value === 'object' && !Array.isArray(value) && value !== null && value.raw !== undefined) {
 
-                sql.push(value.raw);
+                query.push(value.raw);
             } else {
 
-                sql.push((['SELECT'].indexOf(name) === -1 ? name : '') + ' ' + (Array.isArray(value) ? value.join(sub_glue) : value));
+                query.push((['SELECT'].indexOf(name) === -1 ? name : '') + ' ' + (Array.isArray(value) ? value.join(sub_glue) : value));
             }
-            sql = sql.filter(function (el) {
+            query = query.filter(function (el) {
                 return el != null && el !== undefined;
             });
         }

@@ -17,6 +17,14 @@ class WS_stmt {
     stmtOffline = false;
     stmtData = null;
     stmtCallback = undefined;
+    promises = [];
+    onPromises = [];
+
+    constructor(table) {
+
+        if( table !== undefined )
+            this.onPromises[table] = this.onPromises[table] === undefined ? false : this.onPromises[table];
+    }
 
     setConf(conf) {
 
@@ -275,6 +283,37 @@ class WS_stmt {
 
         this.stmtLimit = [limit, offset];
         return this;
+    }
+
+    addPromise(callback, args) {
+
+        this.promises.push(
+            function (callback, args) {
+
+                return new Promise((resolve, reject) => {
+                    callback(resolve, reject, args);
+                });
+            }.bind(this, callback, args)
+        );
+    }
+
+    runPromises() {
+
+        if (this.promises.length && !this.onPromises[this.table]) {
+
+            this.onPromises[this.table] = true;
+            let promise = this.promises.shift();
+            promise().then((res) => {
+
+                setTimeout(() => {
+
+                    this.onPromises[this.table] = false;
+                    if (this.promises.length)
+                        this.runPromises();
+                }, 10);
+                return res;
+            });
+        }
     }
 }
 

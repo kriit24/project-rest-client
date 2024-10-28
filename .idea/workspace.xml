@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="sqlite based data caching and syncing added">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="whereRaw accepts params">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_connect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_sql_lite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sql_lite.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/sql/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/sql/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,27 +38,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/docs/migrations&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PhpStorm 2023.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;two.files.diff.last.used.folder&quot;: &quot;C:/Users/kuno/Documents/_WORK/PHPSTORM/react_native/QRLogistics/node_modules/project-rest-client/src/component&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/kuno/Documents/_WORK/PHPSTORM/npm/project-rest-client/src/component",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\kuno\\Documents\\_WORK\\PHPSTORM\\npm\\project-rest-client\\node_modules\\prettier",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2023.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "two.files.diff.last.used.folder": "C:/Users/kuno/Documents/_WORK/PHPSTORM/react_native/QRLogistics/node_modules/project-rest-client/src/component",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\migrations" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\component" />
+      <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\migrations" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\sql" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest_api\laravel\app" />
       <recent name="C:\Users\kuno\Documents\_WORK\PHPSTORM\npm\project-rest-client\src\docs\rest api\laravel\app" />
@@ -159,7 +164,8 @@
       <workItem from="1728710510289" duration="632000" />
       <workItem from="1728795921494" duration="13049000" />
       <workItem from="1728969726527" duration="137000" />
-      <workItem from="1729053896554" duration="45000" />
+      <workItem from="1729053896554" duration="113000" />
+      <workItem from="1730010114520" duration="8597000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -443,13 +449,6 @@
       <option name="presentableId" value="LOCAL−00047" />
       <updated>1703219740319</updated>
     </task>
-    <task id="LOCAL−00053" summary="sqlite based data caching and syncing added">
-      <option name="closed" value="true" />
-      <created>1728964191191</created>
-      <option name="number" value="LOCAL−00053" />
-      <option name="presentableId" value="LOCAL−00053" />
-      <updated>1728964191191</updated>
-    </task>
     <task id="LOCAL−00054" summary="sqlite based data caching and syncing added">
       <option name="closed" value="true" />
       <created>1728969775241</created>
@@ -457,7 +456,14 @@
       <option name="presentableId" value="LOCAL−00054" />
       <updated>1728969775241</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL−00055" summary="whereRaw accepts params">
+      <option name="closed" value="true" />
+      <created>1729053961218</created>
+      <option name="number" value="LOCAL−00055" />
+      <option name="presentableId" value="LOCAL−00055" />
+      <updated>1729053961218</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -475,7 +481,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added fetch error console warn when request status is not 200 and debug mode is on" />
     <MESSAGE value="send and fetch console log update" />
     <MESSAGE value="use statement added" />
     <MESSAGE value="use statement added fix" />
@@ -500,6 +505,7 @@
     <MESSAGE value="SDK51" />
     <MESSAGE value="readme updated" />
     <MESSAGE value="sqlite based data caching and syncing added" />
-    <option name="LAST_COMMIT_MESSAGE" value="sqlite based data caching and syncing added" />
+    <MESSAGE value="whereRaw accepts params" />
+    <option name="LAST_COMMIT_MESSAGE" value="whereRaw accepts params" />
   </component>
 </project>

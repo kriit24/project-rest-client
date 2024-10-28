@@ -8,12 +8,9 @@ import DB from "./ws_sql_lite";
 
 class WS_model extends WS_stmt {
 
-    promises = [];
-    onPromises = [];
-
     constructor(ws, table) {
 
-        super();
+        super(table);
 
         if (ws === undefined) {
 
@@ -29,8 +26,6 @@ class WS_model extends WS_stmt {
             throw new Error('Model table name is empty');
             return this;
         }
-
-        this.onPromises[this.table] = this.onPromises[this.table] === undefined ? false : this.onPromises[this.table];
 
         (async () => {
 
@@ -75,14 +70,14 @@ class WS_model extends WS_stmt {
 
         let uniqueId = this.unique_id(this.table);
 
-        this.#addPromise((resolve, reject, data) => {
+        this.addPromise((resolve, reject, data) => {
 
             (new sync(this.table))
                 .send({'event': 'post', 'model': this.table, 'data': data});
 
             resolve(true);
         }, Object.assign(Object.assign({'data_unique_id': null}, data), {'data_unique_id': uniqueId}));
-        this.#runPromises();
+        this.runPromises();
 
         return uniqueId;
     }
@@ -95,7 +90,7 @@ class WS_model extends WS_stmt {
         let d = Object.assign({}, data);
         let w = this.stmtWhere;
 
-        this.#addPromise((resolve, reject, data) => {
+        this.addPromise((resolve, reject, data) => {
 
             let model_sync = new sync(this.table);
 
@@ -106,7 +101,7 @@ class WS_model extends WS_stmt {
 
             resolve(true);
         }, {'set': d, 'where': w});
-        this.#runPromises();
+        this.runPromises();
     }
 
     upsert(data, uniqueColumnsWhere) {
@@ -114,14 +109,14 @@ class WS_model extends WS_stmt {
         let d = Object.assign({}, data);
         let w = uniqueColumnsWhere !== undefined ? uniqueColumnsWhere : null;
 
-        this.#addPromise((resolve, reject, data) => {
+        this.addPromise((resolve, reject, data) => {
 
             (new sync(this.table))
                 .send({'event': 'push', 'model': this.table, 'data': data});
 
             resolve(true);
         }, {'set': d, 'where': w});
-        this.#runPromises();
+        this.runPromises();
     }
 
     //.where().delete();
@@ -130,14 +125,14 @@ class WS_model extends WS_stmt {
 
         let w = this.stmtWhere;
 
-        this.#addPromise((resolve, reject, data) => {
+        this.addPromise((resolve, reject, data) => {
 
             let model_sync = new sync(this.table);
             model_sync.send({'event': 'delete', 'model': this.table, 'data': data});
 
                     resolve(true);
         }, {'where': w});
-        this.#runPromises();
+        this.runPromises();
     }
 
     fetchAll(callback) {
@@ -145,7 +140,7 @@ class WS_model extends WS_stmt {
         let {column, join, use, where, group, order, limit} = this.getStmt();
         this.resetStmt();
 
-        this.#addPromise((resolve, reject, data) => {
+        this.addPromise((resolve, reject, data) => {
 
             let {column, join, use, where, group, order, limit} = data;
             this.setStmt(column, join, use, where, group, order, limit);
@@ -159,7 +154,7 @@ class WS_model extends WS_stmt {
                     resolve(true);
                 });
         }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, group: group, order: order}));
-        this.#runPromises();
+        this.runPromises();
     }
 
     fetch(callback) {
@@ -167,7 +162,7 @@ class WS_model extends WS_stmt {
         let {column, join, use, where, group, order, limit} = this.getStmt();
         this.resetStmt();
 
-        this.#addPromise((resolve, reject, data) => {
+        this.addPromise((resolve, reject, data) => {
 
             let {column, join, use, where, group, order, limit} = data;
             this.setStmt(column, join, use, where, group, order, limit);
@@ -181,7 +176,7 @@ class WS_model extends WS_stmt {
                     resolve(true);
                 });
         }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, group: group, order: order}));
-        this.#runPromises();
+        this.runPromises();
     }
 
     live(callback, all = false) {
@@ -189,7 +184,7 @@ class WS_model extends WS_stmt {
         let {column, join, use, where, group, order, limit} = this.getStmt();
         this.resetStmt();
 
-        this.#addPromise((resolve, reject, data) => {
+        this.addPromise((resolve, reject, data) => {
 
             let {column, join, use, where, group, order, limit, all} = data;
             this.setStmt(column, join, use, where, group, order, limit);
@@ -203,7 +198,7 @@ class WS_model extends WS_stmt {
                     resolve(true);
                 }, all);
         }, Object.assign({}, {column: column, join: join, use: use, where: where, limit: limit, group: group, order: order, all: all}));
-        this.#runPromises();
+        this.runPromises();
     }
 
     liveAll(callback) {
@@ -214,37 +209,6 @@ class WS_model extends WS_stmt {
     reset(){
 
         (new sync(this.table)).reset();
-    }
-
-    #addPromise(callback, args) {
-
-        this.promises.push(
-            function (callback, args) {
-
-                return new Promise((resolve, reject) => {
-                    callback(resolve, reject, args);
-                });
-            }.bind(this, callback, args)
-        );
-    }
-
-    #runPromises() {
-
-        if (this.promises.length && !this.onPromises[this.table]) {
-
-            this.onPromises[this.table] = true;
-            let promise = this.promises.shift();
-            promise().then((res) => {
-
-                setTimeout(() => {
-
-                    this.onPromises[this.table] = false;
-                    if (this.promises.length)
-                        this.#runPromises();
-                }, 10);
-                return res;
-            });
-        }
     }
 }
 

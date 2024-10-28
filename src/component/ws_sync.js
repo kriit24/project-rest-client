@@ -5,72 +5,116 @@ import WS_config from "./ws_config";
 import NetInfo from "@react-native-community/netinfo";
 import canJSON from "project-can-json";
 import callback from "./callback";
+import ProjectRest from "project-rest-client";
+import * as SQLite from "expo-sqlite";
+import error from "project-rest-client/src/component/error";
 
 class sync extends WS_stmt {
 
-    cacheFile = null;
+    static sqlite;
 
     constructor(table) {
 
-        super();
+        super(table);
+
+        if (!sync.sqlite) {
+
+            try {
+
+                sync.sqlite = SQLite.openDatabaseSync('project_rest_client');
+
+                let query = "CREATE TABLE IF NOT EXISTS data_sync (\n" +
+                    "data_sync_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                    "data_sync_table TEXT DEFAULT NULL,\n" +
+                    "data_sync_data TEXT DEFAULT NULL,\n" +
+                    "data_sync_data_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n" +
+                    ")";
+                this.exec(query);
+            } catch (e) {
+
+                error({
+                    'message': 'SQLITE SYNC CANNOT OPEN DB',
+                    'error': e,
+                });
+            }
+        }
 
         this.setTable(table);
-        this.cacheFile = WS_config.STORAGE_DIR + '/' + this.ws.channel + '/ws_cache.json';
+        let reSync = () => {
 
-        (async () => {
+            if (WS_config.syncIntervalId === undefined && WS_config.netinfoState_2 == true) {
 
-            //if file does not exists then create
-            let dirInfo = await FileSystem.getInfoAsync(this.cacheFile);
-            if (!dirInfo.exists) {
-
-                await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify({}));
-            }
-        })();
-
-        //re-sync data
-        if (WS_config.syncIntervalId === undefined) {
-
-            //send cache data
-            WS_config.syncIntervalId = setInterval(() => {
-
-                if (WS_config.cacheData[this.cacheFile] === undefined || !Object.values(WS_config.cacheData[this.cacheFile]).length) {
+                //send cache data
+                WS_config.syncIntervalId = setInterval(() => {
 
                     this.cacheSend();
-                }
-            }, 10000);
+                    this.cacheReset();
+                }, 10000);
+            }
+        };
 
-            //sync when appstate changed
-            if (WS_config.appStateSubscription_2 !== undefined) WS_config.appStateSubscription_2.remove();
-            WS_config.appStateSubscription_2 = AppState.addEventListener('change', nextAppState => {
+        let reSyncStop = () => {
 
-                if (WS_config.appStateStat_2.match(/inactive|background/) && nextAppState === 'active') {
+            if (WS_config.syncIntervalId !== undefined) {
 
-                    WS_config.appStateStat_2 = nextAppState;
-                    reSync();
-                    if (WS_config.cacheData[this.cacheFile] === undefined || !Object.values(WS_config.cacheData[this.cacheFile]).length) {
+                clearInterval(WS_config.syncIntervalId);
+                WS_config.syncIntervalId = undefined;
+            }
+        };
 
-                        this.cacheSend();
-                    }
-                }
-                WS_config.appStateStat_2 = nextAppState;
+        //re-sync data at start
+        reSync();
+
+        //sync when appstate changed
+        if (WS_config.appStateSubscription_2 !== undefined) WS_config.appStateSubscription_2.remove();
+        WS_config.appStateSubscription_2 = AppState.addEventListener('change', nextAppState => {
+
+            //app state is changed
+            reSync();
+            WS_config.appStateStat_2 = nextAppState;
+        });
+
+        //sync when netstate changed
+        if (WS_config.netinfoStateSubscription_2 !== undefined) WS_config.netinfoStateSubscription_2();
+        WS_config.netinfoStateSubscription_2 = NetInfo.addEventListener(state => {
+
+            WS_config.netinfoState_2 = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
+            if (WS_config.netinfoState_2 === true) {
+
+                reSync();
+            } else {
+
+                reSyncStop();
+            }
+        });
+    }
+
+    exec(query, params, callback = undefined) {
+
+        /*
+        console.log('S1');
+        console.log(new Date());
+        console.log(query);
+        console.log("\n");
+        */
+
+        let statement, result = null;
+
+        try {
+
+            statement = sync.sqlite.prepareSync(query);
+            result = statement.executeSync(params !== undefined ? params : null);
+            if (callback !== undefined) callback(result);
+        } catch (e) {
+
+            error({
+                'message': 'SQLITE SYNC ERROR',
+                'query': query,
+                'error': e,
             });
+        } finally {
 
-            //sync when netstate changed
-            if (WS_config.netinfoStateSubscription_2 !== undefined) WS_config.netinfoStateSubscription_2();
-            WS_config.netinfoStateSubscription_2 = NetInfo.addEventListener(state => {
-
-                let isConnected = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
-                if (isConnected === true && WS_config.netinfoState_2 === false) {
-
-                    WS_config.netinfoState_2 = isConnected;
-                    reSync();
-                    if (WS_config.cacheData[this.cacheFile] === undefined || !Object.values(WS_config.cacheData[this.cacheFile]).length) {
-
-                        this.cacheSend();
-                    }
-                }
-                WS_config.netinfoState_2 = isConnected;
-            });
+            statement.finalizeSync();
         }
     }
 
@@ -86,101 +130,69 @@ class sync extends WS_stmt {
                 .then((response) => {
                 })
                 //if something is wrong then store data
-                .catch(async (error) => {
+                .catch((error) => {
 
-                    let tmp = row;
-                    let date = new Date();
-
-                    let cacheData = canJSON(await FileSystem.readAsStringAsync(this.cacheFile));
-                    cacheData[date.getTime()] = tmp;
-                    await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify(cacheData));
-
-                    if (Object.keys(cacheData).length >= WS_config.conf.cache_length) {
-
-                        let cacheKeys = Object.keys(cacheData).slice(0, (Object.keys(cacheData).length - WS_config.conf.cache_length));
-                        if (cacheKeys.length) {
-
-                            cacheKeys.forEach((key) => {
-
-                                delete cacheData[key];
-                            });
-                            await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify(cacheData));
-                        }
-                    }
+                    let query = "INSERT INTO `data_sync` (data_sync_table, data_sync_data) " +
+                        "VALUES " +
+                        "($insert_data_sync_table, $insert_data_sync_data)";
+                    let params = {'$insert_data_sync_table': this.table, '$insert_data_sync_data': JSON.stringify(row)};
+                    this.exec(query, params);
                 });
         }, this, row);
     }
 
     reset() {
 
-        WS_config.cacheData = {};
-        FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify({}));
+        this.exec("DELETE FROM data_sync WHERE 1 = 1");
     }
 
-    async cacheSend() {
+    cacheSend() {
 
-        //await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify({}));
+        let query = "SELECT * FROM `data_sync` " +
+            "ORDER BY data_sync_id ASC " +
+            "LIMIT 1 ";
+        let params = {};
 
-        if (WS_config.cacheData[this.cacheFile] === undefined || !Object.values(WS_config.cacheData[this.cacheFile]).length) {
+        let row = {};
+        this.exec(query, params, (result) => row = result.getFirstSync());
 
-            let tmp = canJSON(await FileSystem.readAsStringAsync(this.cacheFile));
-            WS_config.cacheData[this.cacheFile] = {};
-
-            if (Object.keys(tmp).length) {
-
-                Object.keys(tmp).forEach((key) => {
-
-                    let row = tmp[key];
-                    if (row !== undefined && row !== null) {
-
-                        WS_config.cacheData[this.cacheFile][key] = row;
-                    }
-                });
-            }
-        }
-
-        if (WS_config.cacheData[this.cacheFile] !== undefined && Object.values(WS_config.cacheData[this.cacheFile]).length) {
-
-            //let row = WS_config.cacheData[this.cacheFile].shift();
-            let key = Object.keys(WS_config.cacheData[this.cacheFile])[0];
-            let row = WS_config.cacheData[this.cacheFile][key];
+        if (row && Object.keys(row).length) {
 
             /*
-            console.log('');
-            console.log('SEND-CACHE', key);
+            console.log('---CACHE SEND---');
             console.log(row);
-            console.log('LEFT-1', Object.values(WS_config.cacheData[this.cacheFile]).length);
             */
 
-            this.ws
-                .setData(row)
-                .send(row.event, row.model, row.data)
-                //if everything is ok
-                .then(async (response) => {
+            let data = JSON.parse(row.data_sync_data);
 
-                    delete WS_config.cacheData[this.cacheFile][key];
-                    //console.log('LEFT-2', Object.values(WS_config.cacheData[this.cacheFile]).length);
+            callback(function (data) {
 
-                    let cacheData = canJSON(await FileSystem.readAsStringAsync(this.cacheFile));
-                    delete cacheData[key];
-                    //console.log('LEFT-3', Object.values(cacheData).length);
-                    await FileSystem.writeAsStringAsync(this.cacheFile, JSON.stringify(cacheData));
+                this.ws
+                    .setData(data)
+                    .send(data.event, data.model, data.data)
+                    //if everything is ok
+                    .then((response) => {
 
-                    setTimeout(() => {
+                        this.exec("DELETE FROM data_sync WHERE data_sync_id = $data_sync_id", {'$data_sync_id': row.data_sync_id});
+                    })
+                    //if something is wrong
+                    .catch((error) => {
+                    });
+            }, this, data);
+        }
+    }
 
-                        this.cacheSend();
-                    }, 1);
-                })
-                //if something is wrong
-                .catch(async (error) => {
+    cacheReset() {
 
-                    //console.log('LEFT-4', Object.values(WS_config.cacheData[this.cacheFile]).length);
-                    //let`s wait regular 10 seconds to resend data
-                    setTimeout(() => {
+        let query = "SELECT COUNT(1) AS data_sync_count FROM `data_sync` ";
+        let params = {};
 
-                        this.cacheSend();
-                    }, 10000);
-                });
+        let row = {};
+        this.exec(query, params, (result) => row = result.getFirstSync());
+
+        if (row && Object.keys(row) && row.data_sync_count >= WS_config.cache_length) {
+
+            this.exec("DELETE FROM data_sync ORDER BY data_sync_id ASC LIMIT 1");
         }
     }
 }

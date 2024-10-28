@@ -8,13 +8,13 @@ import filter from "./filter";
 import error from "./error";
 import pre from "./pre";
 
-class WS_connect extends WS_stmt {
+class WS_request extends WS_stmt {
 
     channel = undefined;
 
     constructor(conf) {
 
-        super();
+        super(undefined);
 
         this.setConf(conf);
         this.channel = conf.channel;
@@ -429,4 +429,4 @@ class WS_connect extends WS_stmt {
     }
 }
 
-export default WS_connect;
+export default WS_request;

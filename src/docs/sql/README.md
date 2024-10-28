@@ -135,36 +135,31 @@ let update = object
 .result();//get update result
 ```
 
-
 UPSERT - insert or update (unique id required)
 
 ```
-object
+let data = {
+    "notes_content": "kuus",
+};
+let where = {
+    "notes_table": 'fuelling',
+    "notes_table_id": 750,
+};
+                
+let upsert = object
 .SQL()
-.upsert(
-//update, insert data
-//on update it will update only this data
-//on insert it will merge data and unique objects
-{
-    object_address_id: 5000,
-    object_name: 'five thousand'
-},
-//unique id
-{
-    object_id: 5000,
-}
-)
+.upsert(data, where)
 .sync()//sync to API, put after upsert
-.result();
+.result();//get upsert result
 ```
 
 DELETE
 
 ```
-object
+let delete = object
 .SQL()
 .where('object_id', 5000)
 .delete()
 .sync()//sync to API, put after delete
-.result();
+.result();//get delete result
 ```
