@@ -41,7 +41,6 @@ class DB {
         WS_config.db.closeSync();
         SQLite.deleteDatabaseSync(this.#db);
         WS_config.db = SQLite.openDatabaseSync(this.#db);
-        return new Promise((resolve, reject) => resolve('true'));
     }
 
     raw(value) {
@@ -51,12 +50,9 @@ class DB {
 
     query(query, params) {
 
-        return new Promise((resolve, reject) => {
-
             let value = null;
             this.exec(query, params, (result) => value = result.getAllSync());
-            resolve(value);
-        });
+        return value;
     }
 
     select(column = '*') {
