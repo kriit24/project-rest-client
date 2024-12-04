@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="cache is moved to SQLite">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="SDK52 support">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_sql_lite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sql_lite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sync.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +162,7 @@
       <workItem from="1729053896554" duration="113000" />
       <workItem from="1730010114520" duration="15155000" />
       <workItem from="1730611137673" duration="603000" />
-      <workItem from="1731346577565" duration="2065000" />
+      <workItem from="1731346577565" duration="7059000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -446,13 +446,6 @@
       <option name="presentableId" value="LOCAL−00047" />
       <updated>1703219740319</updated>
     </task>
-    <task id="LOCAL−00055" summary="whereRaw accepts params">
-      <option name="closed" value="true" />
-      <created>1729053961218</created>
-      <option name="number" value="LOCAL−00055" />
-      <option name="presentableId" value="LOCAL−00055" />
-      <updated>1729053961218</updated>
-    </task>
     <task id="LOCAL−00056" summary="cache is moved to SQLite">
       <option name="closed" value="true" />
       <created>1730096417827</created>
@@ -460,7 +453,14 @@
       <option name="presentableId" value="LOCAL−00056" />
       <updated>1730096417827</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL−00057" summary="SDK52 support">
+      <option name="closed" value="true" />
+      <created>1731733821689</created>
+      <option name="number" value="LOCAL−00057" />
+      <option name="presentableId" value="LOCAL−00057" />
+      <updated>1731733821689</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,7 +478,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="use statement added" />
     <MESSAGE value="use statement added fix" />
     <MESSAGE value="debug format updated" />
     <MESSAGE value="columns added to fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])" />
@@ -503,6 +502,7 @@
     <MESSAGE value="sqlite based data caching and syncing added" />
     <MESSAGE value="whereRaw accepts params" />
     <MESSAGE value="cache is moved to SQLite" />
-    <option name="LAST_COMMIT_MESSAGE" value="cache is moved to SQLite" />
+    <MESSAGE value="SDK52 support" />
+    <option name="LAST_COMMIT_MESSAGE" value="SDK52 support" />
   </component>
 </project>

@@ -78,7 +78,7 @@ class sync extends WS_stmt {
         if (WS_config.netinfoStateSubscription_2 !== undefined) WS_config.netinfoStateSubscription_2();
         WS_config.netinfoStateSubscription_2 = NetInfo.addEventListener(state => {
 
-            WS_config.netinfoState_2 = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
+            WS_config.netinfoState_2 = (state.isInternetReachable !== undefined && state.isInternetReachable ? state.isInternetReachable : state.isConnected);
             if (WS_config.netinfoState_2 === true) {
 
                 reSync();

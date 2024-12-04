@@ -34,7 +34,7 @@ class WS_request extends WS_stmt {
 
             NetInfo.fetch().then((state) => {
 
-                let isConnected = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
+                let isConnected = (state.isInternetReachable !== undefined && state.isInternetReachable ? state.isInternetReachable : state.isConnected);
                 if (isConnected) {
 
                     let body = {
@@ -141,7 +141,7 @@ class WS_request extends WS_stmt {
 
                 NetInfo.fetch().then((state) => {
 
-                    let isConnected = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
+                    let isConnected = (state.isInternetReachable !== undefined && state.isInternetReachable ? state.isInternetReachable : state.isConnected);
                     if (isConnected) {
 
                         let body = {
@@ -283,7 +283,7 @@ class WS_request extends WS_stmt {
 
                 NetInfo.fetch().then((state) => {
 
-                    let isConnected = (state.isInternetReachable !== undefined ? state.isInternetReachable : state.isConnected);
+                    let isConnected = (state.isInternetReachable !== undefined && state.isInternetReachable ? state.isInternetReachable : state.isConnected);
                     if (isConnected) {
 
                         let mac = null;
