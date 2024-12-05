@@ -146,6 +146,7 @@ class WS_model extends WS_stmt {
             this.setStmt(column, join, use, where, group, order, limit);
 
             new WS_fetchdata(this.table)
+                .setCatch(this.getCatch())
                 .setStmt(column, join, use, where, group, order, limit)
                 .setUseCallbackStmt(this.stmtUseCallback)
                 .fetch((rows) => {
@@ -168,6 +169,7 @@ class WS_model extends WS_stmt {
             this.setStmt(column, join, use, where, group, order, limit);
 
             new WS_fetchdata(this.table)
+                .setCatch(this.getCatch())
                 .setStmt(column, join, use, where, group, order, limit)
                 .setUseCallbackStmt(this.stmtUseCallback)
                 .fetch((rows) => {
@@ -190,6 +192,7 @@ class WS_model extends WS_stmt {
             this.setStmt(column, join, use, where, group, order, limit);
 
             new WS_fetchdata(this.table)
+                .setCatch(this.getCatch())
                 .setStmt(column, join, use, where, group, order, limit)
                 .setUseCallbackStmt(this.stmtUseCallback)
                 .live((rows) => {
@@ -209,6 +212,12 @@ class WS_model extends WS_stmt {
     reset(){
 
         (new sync(this.table)).reset();
+    }
+
+    catch(callback){
+
+        super.setCatch(callback);
+        return this;
     }
 }
 

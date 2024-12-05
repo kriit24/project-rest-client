@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="SDK52 support">
+    <list default="true" id="736a4da2-0ee0-45da-8f02-b6572d2a4f45" name="Changes" comment="IOS state.isInternetReachable is null, so we now ignore null state">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_fetchdata.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_fetchdata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/ws_request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/ws_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/ws_stmt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/ws_stmt.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "kriit24"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:kriit24/project-rest-client.git",
+    "accountId": "78bccfa8-9335-40e9-93a3-189844684c4f"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -162,7 +176,8 @@
       <workItem from="1729053896554" duration="113000" />
       <workItem from="1730010114520" duration="15155000" />
       <workItem from="1730611137673" duration="603000" />
-      <workItem from="1731346577565" duration="7059000" />
+      <workItem from="1731346577565" duration="7911000" />
+      <workItem from="1733302537234" duration="3840000" />
     </task>
     <task id="LOCAL−00001" summary="up">
       <created>1696477525903</created>
@@ -446,13 +461,6 @@
       <option name="presentableId" value="LOCAL−00047" />
       <updated>1703219740319</updated>
     </task>
-    <task id="LOCAL−00056" summary="cache is moved to SQLite">
-      <option name="closed" value="true" />
-      <created>1730096417827</created>
-      <option name="number" value="LOCAL−00056" />
-      <option name="presentableId" value="LOCAL−00056" />
-      <updated>1730096417827</updated>
-    </task>
     <task id="LOCAL−00057" summary="SDK52 support">
       <option name="closed" value="true" />
       <created>1731733821689</created>
@@ -460,7 +468,14 @@
       <option name="presentableId" value="LOCAL−00057" />
       <updated>1731733821689</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL−00058" summary="IOS state.isInternetReachable is null, so we now ignore null state">
+      <option name="closed" value="true" />
+      <created>1733292266462</created>
+      <option name="number" value="LOCAL−00058" />
+      <option name="presentableId" value="LOCAL−00058" />
+      <updated>1733292266462</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,7 +493,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="use statement added fix" />
     <MESSAGE value="debug format updated" />
     <MESSAGE value="columns added to fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])" />
     <MESSAGE value="columns added to OFFLINE fetch request, example: .select(&quot;column1, column2&quot;) OR .select(['column1, column2'])&#10;&#10;AND &#10;&#10;offline use added" />
@@ -503,6 +517,7 @@
     <MESSAGE value="whereRaw accepts params" />
     <MESSAGE value="cache is moved to SQLite" />
     <MESSAGE value="SDK52 support" />
-    <option name="LAST_COMMIT_MESSAGE" value="SDK52 support" />
+    <MESSAGE value="IOS state.isInternetReachable is null, so we now ignore null state" />
+    <option name="LAST_COMMIT_MESSAGE" value="IOS state.isInternetReachable is null, so we now ignore null state" />
   </component>
 </project>

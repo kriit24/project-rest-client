@@ -31,11 +31,17 @@ class WS_fetchdata extends WS_stmt {
                 callback(rows.length ? rows : {});
             })
             //fetch error
-            .catch(() => {
-            });
-                        }
+            .catch((e) => {
 
-    live(callback, all = false){
+                let catchCallback = this.getCatch();
+                if (catchCallback)
+                    catchCallback(e);
+                else
+                callback({});
+            });
+    }
+
+    live(callback, all = false) {
 
         let {column, join, use, where, group, order, limit} = this.getStmt();
         this.resetStmt();

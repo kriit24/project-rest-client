@@ -19,6 +19,7 @@ class WS_stmt {
     stmtCallback = undefined;
     promises = [];
     onPromises = [];
+    catchCallback = null;
 
     constructor(table) {
 
@@ -47,6 +48,17 @@ class WS_stmt {
     get ws() {
 
         return WS_config.ws;
+    }
+
+    setCatch(callback){
+
+        this.catchCallback = callback;
+        return this;
+    }
+
+    getCatch(callback){
+
+        return this.catchCallback;
     }
 
     encrypt(data) {
